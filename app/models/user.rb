@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   def create_library
     self.library = Library.create
   end
+
+  def add_to_library(item)
+    self.library.add(item)
+  end
 end

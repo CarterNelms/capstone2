@@ -1,0 +1,2 @@
+Fabricator(:movie) do
+end

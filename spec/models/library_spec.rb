@@ -4,8 +4,7 @@ RSpec.describe Library, :type => :model do
   # pending "add some examples to (or delete) #{__FILE__}"
 
   it { should belong_to :user }
-  it { pending "items must be implemented"
-    should have_many :items }
+  it { should have_many :items }
 
   context "New user is created" do
     let!(:user) { Fabricate(:user) }

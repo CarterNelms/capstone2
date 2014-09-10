@@ -1,5 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Movie, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it { should belong_to :item_list }
+
+  context "Item is added to a user's library" do
+    let!(:user) { Fabricate(:user) }
+    let!(:movie) { Fabricate(:movie) }
+    it "successfully saves the item to the user's library" do
+      # pending "items must be implemented"
+      user.add_to_library(movie)
+      expect(user.library.items).to include(movie)
+    end
+  end
 end
