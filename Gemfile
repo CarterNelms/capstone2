@@ -7,7 +7,8 @@ gem 'haml'
 gem "haml-rails"
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
-gem "letter_opener", :group => :development
+gem 'letter_opener', :group => :development
+# gem 'omniauth'
 gem 'pg', '~> 0.17.1'
 gem 'rails', '4.1.5'
 gem 'sass-rails', '~> 4.0.3'
@@ -25,7 +26,8 @@ end
 group :test do
   gem 'fabrication'
   gem 'shoulda'
-  gem 'capybara'
+  gem 'capybara', '>= 2.2.0'
+  gem 'capybara-email'
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
