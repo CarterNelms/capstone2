@@ -7,4 +7,9 @@ class User < ActiveRecord::Base
          # , :omniauthable
 
   has_one :library
+  before_create :create_library
+
+  def create_library
+    self.library = Library.create
+  end
 end

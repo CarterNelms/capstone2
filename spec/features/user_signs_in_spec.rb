@@ -16,8 +16,8 @@ feature "User signs in" do
     visit '/'
     click_link "Sign Up"
     fill_in "Email", with: "user1@example.com"
-    find(".user_password").fill_in "Password", with: "password1"
-    find(".user_password_confirmation").fill_in "Password confirmation", with: "password1"
+    fill_in "Password", with: "password1", :match => :prefer_exact
+    fill_in "Password confirmation", with: "password1"
     click_button "Sign up"
     open_email "user1@example.com"
     current_email.click_link "Confirm my account"

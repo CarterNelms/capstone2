@@ -1,3 +1,2 @@
-class Library < ActiveRecord::Base
-  belongs_to :user
+class Library < ItemList
 end
