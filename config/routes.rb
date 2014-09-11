@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  # get 'users/new'
 
-  get 'welcome/index'
+  get 'libraries/index'
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
@@ -10,7 +9,17 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :users
+  resources :users, only: [:index, :show] do
+    resources :libraries, only: [:index]
+  end
+
+  resources :items, only: [:index, :create, :new]
+  namespace :items do
+    resources :movies, only: [:show]
+  end
+
+  get "/items/for_rent", to: "items#for_rent"
+  get "/items/search", to: "items#search"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

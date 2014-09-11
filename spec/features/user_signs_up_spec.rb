@@ -37,7 +37,7 @@ feature "User signs up" do
   scenario "Happy Path, Verify new account and sign in" do
     open_email "user1@example.com"
     current_email.click_link "Confirm my account"
-    page.should have_content(" Your email address has been successfully confirmed.")
+    page.should have_content("Your email address has been successfully confirmed.")
     fill_in "Email", with: "user1@example.com"
     fill_in "Password", with: "password1"
     click_button "Sign in"

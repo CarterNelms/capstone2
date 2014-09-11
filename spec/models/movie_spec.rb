@@ -11,6 +11,9 @@ RSpec.describe Movie, :type => :model do
       # pending "items must be implemented"
       user.add_to_library(movie)
       expect(user.library.items).to include(movie)
+      expect(user.library.items[0]).to eq movie
+      expect(user.library.items[0].class).to eq Movie
+      expect(user.library.items[0].type).to eq "Movie"
     end
   end
 end

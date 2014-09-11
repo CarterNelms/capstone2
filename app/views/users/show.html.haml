@@ -1,0 +1,3 @@
+- if params[:id].to_i == current_user.id
+  =link_to "My Library", user_libraries_path(current_user.id)
+  =link_to "Edit Profile", edit_user_registration_path
