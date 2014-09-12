@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'wanted_lists/index'
+
   get 'libraries/index'
 
   devise_for :users
@@ -11,15 +13,17 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show] do
     resources :libraries, only: [:index]
+    resources :wanted_lists, only: [:index]
   end
 
   resources :items, only: [:index, :create, :new]
-  namespace :items do
-    resources :movies, only: [:show]
-  end
+  # namespace :items do
+  #   resources :movies, only: [:show]
+  # end
 
   get "/items/for_rent", to: "items#for_rent"
   get "/items/search", to: "items#search"
+  get "/items/new_wanted", to: "items#new_wanted"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

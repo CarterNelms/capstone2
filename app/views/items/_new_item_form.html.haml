@@ -1,0 +1,11 @@
+- wanted = false if !defined? wanted
+= simple_form_for :item, url: items_path, :html => {:method => :post} do |f|
+  = f.input :name, label: "Item name"
+  - item_type_names = Item.type_names
+  = f.input :type, label: "Item type", collection: item_type_names, :selected => item_type_names[0]
+  = f.label "Rent terms"
+  = f.input :min_duration, :input_html => {value: number_with_precision(1, precision: 0) }
+  = f.input :max_duration, :input_html => {value: number_with_precision(7, precision: 0) }
+  = f.input :rate, :input_html => {value: number_with_precision(1, precision: 2) }
+  = f.hidden_field :wanted, :value => wanted
+  = f.submit "Add New Item"

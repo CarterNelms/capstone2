@@ -14,6 +14,7 @@ RSpec.describe VideoGame, :type => :model do
       expect(user.library.items[0]).to eq video_game
       expect(user.library.items[0].class).to eq VideoGame
       expect(user.library.items[0].type).to eq "VideoGame"
+      expect(video_game.item_list_id).to eq user.library.id
     end
   end
 end

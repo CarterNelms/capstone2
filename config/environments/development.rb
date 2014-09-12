@@ -9,6 +9,13 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  # The following lines allow the class function "descendants" to work in delevopment
+  path_to_models = Rails.root.join('app', 'models', '*.rb')
+  config.eager_load_paths += Dir[path_to_models]
+  ActionDispatch::Reloader.to_prepare do
+    Dir[path_to_models].each {|file| require_dependency file}
+  end
+
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false

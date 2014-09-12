@@ -1,0 +1,2 @@
+module WantedListsHelper
+end

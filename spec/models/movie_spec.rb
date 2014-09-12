@@ -14,6 +14,7 @@ RSpec.describe Movie, :type => :model do
       expect(user.library.items[0]).to eq movie
       expect(user.library.items[0].class).to eq Movie
       expect(user.library.items[0].type).to eq "Movie"
+      expect(movie.item_list_id).to eq user.library.id
     end
   end
 end
