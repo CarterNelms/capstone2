@@ -16,14 +16,14 @@ class ItemsController < ApplicationController
 
   def create
     # item_params = params["item"].merge(item_list_id: current_user.library.id).except("type").to_h
-    item_params = params["item"].except(["type", "wanted"]).to_h
+    item_params = params["item"].except("type", "wanted").to_h
     model = params["item"]["type"].gsub(' ', '').constantize
 
     item = model.create(item_params)
     method_name = "add_to_#{params['item']['wanted'] ? 'wanted_list' : 'library'}"
     if current_user.send(method_name, item)
-      flash.notice = "#{item.name} (#{item.proper_class_name}) has successfully been added to your library."
-      redirect_to user_libraries_path(current_user)
+      flash.notice = "#{item.name} (#{item.proper_class_name}) has successfully been added to your #{params['item']['wanted'] ? 'list of wanted items' : 'library'}."
+      redirect_to params['item']['wanted'] ? user_wanted_lists_path(current_user) : user_libraries_path(current_user)
     else
       flash.alert = "Item could not be created"
       redirect_to new_item_path

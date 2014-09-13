@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912195713) do
+ActiveRecord::Schema.define(version: 20140913201710) do
 
-# Could not dump table "item_lists" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "item_lists", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "type"
+    t.integer  "item_ids"
+  end
+
+  add_index "item_lists", ["user_id"], name: "index_item_lists_on_user_id"
 
   create_table "items", force: true do |t|
     t.integer  "item_list_id"
@@ -28,12 +35,6 @@ ActiveRecord::Schema.define(version: 20140912195713) do
   end
 
   add_index "items", ["item_list_id"], name: "index_items_on_item_list_id"
-
-  create_table "libraries", force: true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -53,14 +54,10 @@ ActiveRecord::Schema.define(version: 20140912195713) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "library_id"
+    t.integer  "wanted_list_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "wanted_lists", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end
