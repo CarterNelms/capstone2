@@ -1,0 +1,8 @@
+%h3 Titles
+%p= @results
+/ - @results.each do | result |
+/   %ul
+/     %li= result
+/     %li= result["name"]
+/     %li= result["platform"]
+/     %li= result["score"]

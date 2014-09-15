@@ -16,14 +16,13 @@
         - else
           %li= link_to "Sign In", new_user_session_path
           %li= link_to "Sign Up", new_user_registration_path
-        %li
-          %form{method: "GET", action: items_search_path}
-            %input{type: 'text', placeholder: 'Search'}
-            / %input{type: 'submit'}
+        / %li
+        /   %form{method: "GET", action: items_search_path}
+        /     %input{type: 'text', placeholder: 'Search'}
+        /     %input{type: 'submit'}
         / %li= "Search", items_search_path
         %li= link_to "Listings", items_path
-        %li= link_to "For Rent", items_for_rent_path
-        %li= link_to "Wanted", items_wanted_path
+        %li= link_to "Titles", titles_path
       = link_to root_path, id: "logo" do
         %h2.title
           / = image_tag "POGO_10.090_OCA.svg", class: "logo"

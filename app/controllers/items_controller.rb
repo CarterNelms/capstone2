@@ -15,8 +15,9 @@ class ItemsController < ApplicationController
     @items = items_of_list_type(:WantedList)
   end
 
-  def search
-    @results = api(:title => "The Elder Scrolls V: Skyrim")
+  def titles
+    # @results = api(:title => "The Elder Scrolls V: Skyrim")
+    @results = api(:title => "Lord of the Rings")
   end
 
   def new_wanted
@@ -51,9 +52,18 @@ class ItemsController < ApplicationController
 
   def api(parameters)
     # These code snippets use an open-source library. http://unirest.io/ruby
-    Unirest.post("https://byroredux-metacritic.p.mashape.com/search/game",
-             headers:{'X-Mashape-Key' => "P4tmxj1VOvmshEjU6SkDZPPegQpbp1PgT6CjsnMggmVWvrbRvA"},
-             parameters: parameters.merge(:retry => 4)
-             ).body["results"]
+    # Unirest.post("https://byroredux-metacritic.p.mashape.com/search/game",
+    #          headers:{'X-Mashape-Key' => "P4tmxj1VOvmshEjU6SkDZPPegQpbp1PgT6CjsnMggmVWvrbRvA"},
+    #          parameters: parameters.merge(:retry => 4)
+    #          ).body["results"]
+    # Unirest.get("http://www.myapifilms.com/title",
+    #          # headers:{'X-Mashape-Key' => "P4tmxj1VOvmshEjU6SkDZPPegQpbp1PgT6CjsnMggmVWvrbRvA"},
+    #          parameters: parameters
+    #          ).body[0]
+    # Imdb::Search.new(parameters[:title]).movies
+    Unirest.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=tntv5r3367ajeyw9w9wd862g&q=matrix",
+             # headers:{'X-Mashape-Key' => "P4tmxj1VOvmshEjU6SkDZPPegQpbp1PgT6CjsnMggmVWvrbRvA"},
+             parameters: parameters
+             ).body
   end
 end

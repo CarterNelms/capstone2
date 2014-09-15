@@ -5,6 +5,7 @@ gem 'devise'
 gem 'foundation-rails'
 gem 'haml'
 gem "haml-rails"
+# gem 'imdb', '~> 0.8'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'letter_opener', :group => :development

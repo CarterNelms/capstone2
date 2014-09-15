@@ -19,9 +19,7 @@ Rails.application.routes.draw do
   #   resources :movies, only: [:show]
   # end
 
-  get "/items/for_rent", to: "items#for_rent"
-  get "/items/wanted", to: "items#wanted"
-  get "/items/search", to: "items#search"
+  get "/titles", to: "items#titles"
   get "/items/new_wanted", to: "items#new_wanted"
 
   # Example of regular route:
