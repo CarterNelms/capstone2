@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
+
   def index
-    @items = Item.all
+    @search = Item.search(params[:q])
+    @items = @search.result
+    @search.build_condition if @search.conditions.empty?
+    @search.build_sort if @search.sorts.empty?
   end
 
   def for_rent

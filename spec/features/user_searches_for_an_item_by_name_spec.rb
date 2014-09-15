@@ -29,6 +29,12 @@ feature "User searches for an item by name" do
 
   scenario "Happy Path, User visits his library" do
     click_link "Listings"
-    fill_in "Search Listings", with: movie1.name
+    select "Name", from: "q_c_0_a_0_name"
+    fill_in "q_c_0_v_0_value", with: movie1.name
+    click_button "Search"
+    page.should have_content movie1.name
+    page.should_not have_content movie2.name
+    page.should_not have_content movie3.name
+    page.should_not have_content movie4.name
   end
 end

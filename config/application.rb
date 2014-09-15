@@ -6,6 +6,15 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+def link_to_add_fields(name, f, type)
+  new_object = f.object.send "build_#{type}"
+  id = "new_#{type}"
+  fields = f.send("#{type}_fields", new_object, child_index: id) do |builder|
+    render(type.to_s + "_fields", f: builder)
+  end
+  link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+end
+
 module Capstone2
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

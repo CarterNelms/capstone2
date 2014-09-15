@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     resources :wanted_lists, only: [:index]
   end
 
-  resources :items, only: [:index, :create, :new]
+  resources :items, only: [:index, :create, :new] do
+    collection { post :search, to: 'items#index' }
+  end
   # namespace :items do
   #   resources :movies, only: [:show]
   # end
