@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'wanted_lists/index'
-
-  get 'libraries/index'
-
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -22,6 +18,7 @@ Rails.application.routes.draw do
   # end
 
   get "/items/for_rent", to: "items#for_rent"
+  get "/items/wanted", to: "items#wanted"
   get "/items/search", to: "items#search"
   get "/items/new_wanted", to: "items#new_wanted"
 

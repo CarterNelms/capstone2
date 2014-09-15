@@ -1,4 +1,4 @@
-- wanted = false if !defined? wanted
+- wanted = false if !wanted
 = simple_form_for :item, url: items_path, :html => {:method => :post} do |f|
   = f.input :name, label: "Item name"
   - item_type_names = Item.type_names

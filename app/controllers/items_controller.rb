@@ -7,6 +7,10 @@ class ItemsController < ApplicationController
     @items = items_of_list_type(:Library)
   end
 
+  def wanted
+    @items = items_of_list_type(:WantedList)
+  end
+
   def search
     @results = api(:title => "The Elder Scrolls V: Skyrim")
   end
@@ -15,18 +19,23 @@ class ItemsController < ApplicationController
   end
 
   def create
-    # item_params = params["item"].merge(item_list_id: current_user.library.id).except("type").to_h
-    item_params = params["item"].except("type", "wanted").to_h
-    model = params["item"]["type"].gsub(' ', '').constantize
+    if current_user
+      item_params = params["item"].except("type", "wanted").to_h
+      model = params["item"]["type"].gsub(' ', '').constantize
+      is_wanted = params["item"]["wanted"] == "true"
 
-    item = model.create(item_params)
-    method_name = "add_to_#{params['item']['wanted'] ? 'wanted_list' : 'library'}"
-    if current_user.send(method_name, item)
-      flash.notice = "#{item.name} (#{item.proper_class_name}) has successfully been added to your #{params['item']['wanted'] ? 'list of wanted items' : 'library'}."
-      redirect_to params['item']['wanted'] ? user_wanted_lists_path(current_user) : user_libraries_path(current_user)
+      item = model.create(item_params)
+      method_name = "add_to_#{is_wanted ? 'wanted_list' : 'library'}"
+      if current_user.send(method_name, item)
+        flash.notice = "#{item.name} (#{item.proper_class_name}) has successfully been added to your #{is_wanted ? 'list of wanted items' : 'library'}."
+        redirect_to is_wanted ? user_wanted_lists_path(current_user) : user_libraries_path(current_user)
+      else
+        flash.alert = "Item could not be created"
+        redirect_to new_item_path
+      end
     else
-      flash.alert = "Item could not be created"
-      redirect_to new_item_path
+      flash.alert = "You must be signed in to do that"
+      redirect_to new_user_session_path 
     end
   end
 

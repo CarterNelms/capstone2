@@ -11,6 +11,7 @@ gem 'letter_opener', :group => :development
 # gem 'omniauth'
 gem 'pg', '~> 0.17.1'
 gem 'rails', '4.1.5'
+gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 gem 'sass-rails', '~> 4.0.3'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'simple_form'
