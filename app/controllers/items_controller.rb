@@ -28,6 +28,9 @@ class ItemsController < ApplicationController
     end
   end
 
+  def new
+  end
+
   def new_wanted
   end
 

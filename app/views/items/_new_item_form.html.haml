@@ -1,11 +1,13 @@
 - wanted = false if !wanted
-= simple_form_for :item, url: items_path, :html => {:method => :post} do |f|
-  = f.input :name, label: "Item name"
+- title_params = params[:item] || {}
+= simple_form_for :item, url: items_path do |f|
+  = f.input :name, label: "Item name", input_html: { value: title_params[:name], readonly: !title_params.empty? }
   - item_type_names = Item.type_names
-  = f.input :type, label: "Item type", collection: item_type_names, :selected => item_type_names[0]
+  - [false, true].each do |is_hidden|
+    = f.input :type, label: !is_hidden ? "Item type" : false, collection: item_type_names, :selected => title_params[:type] || item_type_names[0], input_html: { disabled: (is_hidden && title_params.empty?) || !(is_hidden || title_params.empty?), hidden: is_hidden }
   = f.label "Rent terms"
-  = f.input :min_duration, :input_html => {value: number_with_precision(1, precision: 0) }
-  = f.input :max_duration, :input_html => {value: number_with_precision(7, precision: 0) }
-  = f.input :rate, :input_html => {value: number_with_precision(1, precision: 2) }
+  = f.input :min_duration, input_html: { value: number_with_precision(1, precision: 0) }
+  = f.input :max_duration, input_html: { value: number_with_precision(7, precision: 0) }
+  = f.input :rate, input_html: { value: number_with_precision(1, precision: 2) }
   = f.hidden_field :wanted, :value => wanted
   = f.submit "Add New Item"

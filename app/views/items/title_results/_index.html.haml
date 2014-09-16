@@ -1,4 +1,13 @@
 - dirname = "items/title_results"
 - Item.type_symbols_plural.each do |s|
-  = render "#{dirname}/#{s.to_s}"
-  %p ---------------
+  %ul
+    - if @results[s]
+      - @results[s].each do | result |
+        - @item_data = {}
+        = render partial: "#{dirname}/#{s.to_s}", locals: { result: result }
+        - @item_data[:type] = s.to_s.classify.constantize
+        %li= @item_data[:name]
+        = simple_form_for :item, url: new_item_path, method: :get, :defaults => { as: :hidden } do |f|
+          = f.input :name, :input_html => { value: @item_data[:name] }
+          = f.input :type, :input_html => { value: @item_data[:type] }
+          = f.submit "Add to Library"

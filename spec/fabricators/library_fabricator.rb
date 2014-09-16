@@ -1,0 +1,2 @@
+Fabricator(:library) do
+end
