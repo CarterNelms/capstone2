@@ -1,8 +1,18 @@
 %h3 Titles
-%p= @results
-/ - @results.each do | result |
-/   %ul
-/     %li= result
-/     %li= result["name"]
-/     %li= result["platform"]
-/     %li= result["score"]
+= simple_form_for :titles do |f|
+  = f.input :keywords
+  = f.submit "Search"
+- if @results
+  - @results[:movies].each do | result |
+    %ul
+      %li= result["title"]
+  - @results[:books].each do | result |
+    %ul
+      %li= result["volumeInfo"]["title"]
+  - @results[:video_games].each do | result |
+    %ul
+      %li= result["name"]
+
+  %p= @results[:movies]
+  %p= @results[:books]
+  %p= @results[:video_games]

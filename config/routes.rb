@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   #   resources :movies, only: [:show]
   # end
 
-  get "/titles", to: "items#titles"
+  match '/titles', to: "items#titles", via: [:get, :post]
   get "/items/new_wanted", to: "items#new_wanted"
 
   # Example of regular route:

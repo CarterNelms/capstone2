@@ -17,7 +17,11 @@ class ItemsController < ApplicationController
 
   def titles
     # @results = api(:title => "The Elder Scrolls V: Skyrim")
-    @results = api(:title => "Lord of the Rings")
+    parameters = params["titles"]
+    if parameters
+      keywords = parameters[:keywords]
+      @results = api(keywords) if keywords
+    end
   end
 
   def new_wanted
@@ -50,20 +54,19 @@ class ItemsController < ApplicationController
     ItemList.where("type = ?", type).reduce([]){ |items, current_library| items.concat(current_library.items) }
   end
 
-  def api(parameters)
+  def api(keywords)
     # These code snippets use an open-source library. http://unirest.io/ruby
-    # Unirest.post("https://byroredux-metacritic.p.mashape.com/search/game",
-    #          headers:{'X-Mashape-Key' => "P4tmxj1VOvmshEjU6SkDZPPegQpbp1PgT6CjsnMggmVWvrbRvA"},
-    #          parameters: parameters.merge(:retry => 4)
-    #          ).body["results"]
-    # Unirest.get("http://www.myapifilms.com/title",
-    #          # headers:{'X-Mashape-Key' => "P4tmxj1VOvmshEjU6SkDZPPegQpbp1PgT6CjsnMggmVWvrbRvA"},
-    #          parameters: parameters
-    #          ).body[0]
-    # Imdb::Search.new(parameters[:title]).movies
-    Unirest.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=tntv5r3367ajeyw9w9wd862g&q=matrix",
+    results = {}
+    results[:movies] = Unirest.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=tntv5r3367ajeyw9w9wd862g&q=#{keywords}",
              # headers:{'X-Mashape-Key' => "P4tmxj1VOvmshEjU6SkDZPPegQpbp1PgT6CjsnMggmVWvrbRvA"},
-             parameters: parameters
-             ).body
+             # parameters: parameters
+             ).body["movies"]
+    results[:books] = Unirest.get("https://www.googleapis.com/books/v1/volumes?key=AIzaSyDI-BNrGVVsqwFNAhzqWJ2CcZ_d8wW74us&q=#{keywords}",
+             # parameters: parameters
+             ).body["items"]
+    results[:video_games] = Unirest.get("http://www.giantbomb.com/api/search/?api_key=62b3d37a57d0c862feb6d6c96ad75e3d152499af&format=json&query=#{keywords}&resources=game"
+             # parameters: parameters
+             ).body["results"]
+    results
   end
 end
