@@ -1,18 +1,7 @@
 %h3 Titles
 = simple_form_for :titles do |f|
-  = f.input :keywords
+  = f.input :keywords, :input_html => { value: @input[:keywords] }
   = f.submit "Search"
-- if @results
-  - @results[:movies].each do | result |
-    %ul
-      %li= result["title"]
-  - @results[:books].each do | result |
-    %ul
-      %li= result["volumeInfo"]["title"]
-  - @results[:video_games].each do | result |
-    %ul
-      %li= result["name"]
-
-  %p= @results[:movies]
-  %p= @results[:books]
-  %p= @results[:video_games]
+  - Item.type_symbols_plural.each do |s|
+    = f.input s, as: :boolean, :input_html => { checked: @input[s] != "0" }
+= render "/items/title_results/index"

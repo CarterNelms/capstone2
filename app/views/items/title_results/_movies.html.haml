@@ -1,0 +1,4 @@
+- if @results[:movies]
+  - @results[:movies].each do | result |
+    %ul
+      %li= result["title"]

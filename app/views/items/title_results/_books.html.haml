@@ -1,0 +1,4 @@
+- if @results[:books]
+  - @results[:books].each do | result |
+    %ul
+      %li= result["volumeInfo"]["title"]

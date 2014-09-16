@@ -16,11 +16,15 @@ class ItemsController < ApplicationController
   end
 
   def titles
-    # @results = api(:title => "The Elder Scrolls V: Skyrim")
-    parameters = params["titles"]
-    if parameters
-      keywords = parameters[:keywords]
-      @results = api(keywords) if keywords
+    @results = {}
+    @input = params["titles"] || {}
+    if !@input.empty?
+      keywords = @input[:keywords].gsub(/[^a-zA-Z0-9\s]/, '')
+      if keywords.length > 0
+        Item.type_symbols_plural.each do |s|
+          @results[s] = send("#{s.to_s}_api", keywords) if @input[s] == "1"
+        end
+      end
     end
   end
 
@@ -54,19 +58,15 @@ class ItemsController < ApplicationController
     ItemList.where("type = ?", type).reduce([]){ |items, current_library| items.concat(current_library.items) }
   end
 
-  def api(keywords)
-    # These code snippets use an open-source library. http://unirest.io/ruby
-    results = {}
-    results[:movies] = Unirest.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=tntv5r3367ajeyw9w9wd862g&q=#{keywords}",
-             # headers:{'X-Mashape-Key' => "P4tmxj1VOvmshEjU6SkDZPPegQpbp1PgT6CjsnMggmVWvrbRvA"},
-             # parameters: parameters
-             ).body["movies"]
-    results[:books] = Unirest.get("https://www.googleapis.com/books/v1/volumes?key=AIzaSyDI-BNrGVVsqwFNAhzqWJ2CcZ_d8wW74us&q=#{keywords}",
-             # parameters: parameters
-             ).body["items"]
-    results[:video_games] = Unirest.get("http://www.giantbomb.com/api/search/?api_key=62b3d37a57d0c862feb6d6c96ad75e3d152499af&format=json&query=#{keywords}&resources=game"
-             # parameters: parameters
-             ).body["results"]
-    results
+  def movies_api(keywords)
+    Unirest.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=tntv5r3367ajeyw9w9wd862g&q=#{keywords}",).body["movies"]
+  end
+
+  def books_api(keywords)
+    Unirest.get("https://www.googleapis.com/books/v1/volumes?key=AIzaSyDI-BNrGVVsqwFNAhzqWJ2CcZ_d8wW74us&q=#{keywords}",).body["items"]
+  end
+
+  def video_games_api(keywords)
+    Unirest.get("http://www.giantbomb.com/api/search/?api_key=62b3d37a57d0c862feb6d6c96ad75e3d152499af&format=json&query=#{keywords}&resources=game").body["results"]
   end
 end
