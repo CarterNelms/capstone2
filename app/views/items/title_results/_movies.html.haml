@@ -1,1 +1,3 @@
 - @item_data[:name] = result["title"]
+- images = result["posters"]
+- @item_data[:image] = images["detailed"].gsub('_tmb', '_det') if images

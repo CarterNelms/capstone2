@@ -1,2 +1,7 @@
 %h1 Libraries#index
+- if current_user
+  %ul
+    - current_user.library.items.each do |i|
+      %li= i.name
+  
 =link_to "Add New Item", new_item_path

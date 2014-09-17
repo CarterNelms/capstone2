@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'coffee-rails', '~> 4.0.0'
 gem 'devise'
+gem 'foundation'
 gem 'foundation-rails'
 gem 'haml'
 gem "haml-rails"

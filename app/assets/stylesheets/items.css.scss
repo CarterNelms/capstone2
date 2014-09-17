@@ -1,3 +1,26 @@
 // Place all the styles related to the Items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "foundation";
+
+#titles{
+  @include grid-row();
+
+  width: 100%;
+  max-width: 100%;
+
+  > *{
+    @include grid-column(12);
+    height: 90vh;
+    overflow-y: scroll;
+  }
+
+  #books{ background-color: blue }
+  #movies{ background-color: red; }
+  #video_games{ background-color: green; }
+}
+
+#titles[data-count="1"]{ > *{ @include grid-column(12); } }
+#titles[data-count="2"]{ > *{ @include grid-column(6); } }
+#titles[data-count="3"]{ > *{ @include grid-column(4); } }
+#titles[data-count="4"]{ > *{ @include grid-column(3); } }

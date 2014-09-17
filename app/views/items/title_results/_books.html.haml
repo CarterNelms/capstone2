@@ -1,1 +1,5 @@
-- @item_data[:name] = result["volumeInfo"]["title"]
+- volume_info = result["volumeInfo"]
+- if volume_info
+  - @item_data[:name] = volume_info["title"]
+  - x = volume_info["imageLinks"]
+  - @item_data[:image] = x["thumbnail"] if !x.nil?

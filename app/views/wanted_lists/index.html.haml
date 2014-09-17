@@ -1,2 +1,7 @@
 %h1 WantedLists#index
+- if current_user
+  %ul
+    - current_user.wanted_list.items.each do |i|
+      %li= i.name
+
 =link_to "Add New Item", items_new_wanted_path

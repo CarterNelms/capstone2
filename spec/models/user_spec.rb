@@ -2,6 +2,10 @@ require 'rails_helper'
 # require 'devise'
 
 RSpec.describe User, :type => :model do
+
+  it { should have_one :library }
+  it { should have_one :wanted_list }
+
   before do
     Fabricate(:user)
   end

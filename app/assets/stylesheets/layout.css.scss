@@ -1,0 +1,19 @@
+// Place all the styles related to the entire application.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "foundation";
+
+nav{
+  height: 10vh;
+
+  @include grid-row();
+
+  // > *{
+  //   @include grid-column(6);
+  // }
+}
+
+main{
+  height: 90vh;
+  background-color: red;
+}
