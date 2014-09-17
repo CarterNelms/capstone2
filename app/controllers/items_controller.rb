@@ -28,6 +28,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  def from_title
+    if params[:library]
+      redirect_to new_item_path(params)
+    elsif params[:wanted_list]
+      redirect_to items_new_wanted_path(params)
+    else 
+      redirect_to titles_path
+    end
+  end
+
   def new
   end
 

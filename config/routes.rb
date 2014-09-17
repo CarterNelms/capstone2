@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   match '/titles', to: "items#titles", via: [:get, :post]
   get "/items/new_wanted", to: "items#new_wanted"
+  get "/items/from_title", to: "items#from_title"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

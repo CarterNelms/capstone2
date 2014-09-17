@@ -7,7 +7,8 @@
         = render partial: "#{dirname}/#{s.to_s}", locals: { result: result }
         - @item_data[:type] = s.to_s.classify.constantize
         %li= @item_data[:name]
-        = simple_form_for :item, url: new_item_path, method: :get, :defaults => { as: :hidden } do |f|
-          = f.input :name, :input_html => { value: @item_data[:name] }
-          = f.input :type, :input_html => { value: @item_data[:type] }
-          = f.submit "Add to Library"
+        = simple_form_for :item, url: items_from_title_path, method: :get,defaults: { as: :hidden } do |f|
+          = f.input :name, input_html: { value: @item_data[:name] }
+          = f.input :type, input_html: { value: @item_data[:type] }
+          = f.submit "I Have This", name: :library
+          = f.submit "I Want This", name: :wanted_list
