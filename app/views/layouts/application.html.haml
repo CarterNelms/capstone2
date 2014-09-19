@@ -8,25 +8,28 @@
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
   %body
-    %nav
-      %ul
-        - if user_signed_in?
-          %li= link_to "Profile", user_path(current_user) 
-          %li= link_to "Sign Out", destroy_user_session_path, method: :delete
-        - else
-          %li= link_to "Sign In", new_user_session_path
-          %li= link_to "Sign Up", new_user_registration_path
-        / %li
-        /   %form{method: "GET", action: items_search_path}
-        /     %input{type: 'text', placeholder: 'Search'}
-        /     %input{type: 'submit'}
-        / %li= "Search", items_search_path
-        %li= link_to "Listings", items_path
-        %li= link_to "Titles", titles_path
-      = link_to root_path, id: "logo" do
-        %h2.title
-          / = image_tag "POGO_10.090_OCA.svg", class: "logo"
-          Capstone2
+    .fixed
+      %nav.main.top-bar
+        = link_to root_path, id: "logo" do
+          %h2.title
+            / = image_tag "POGO_10.090_OCA.svg", class: "logo"
+            Capstone2
+        %ul
+          - if user_signed_in?
+            %li= link_to "Profile", user_path(current_user) 
+            %li= link_to "Sign Out", destroy_user_session_path, method: :delete
+          - else
+            %li= link_to "Sign In", new_user_session_path
+            %li= link_to "Sign Up", new_user_registration_path
+          / %li
+          /   %form{method: "GET", action: items_search_path}
+          /     %input{type: 'text', placeholder: 'Search'}
+          /     %input{type: 'submit'}
+          / %li= "Search", items_search_path
+          %li= link_to "Listings", items_path
+          %li= link_to "Titles", titles_path
+      - if content_for?(:nav)
+        %nav.top-bar= yield(:nav)
     %main
       - if notice.present?
         .alert-box.success{ "data-alert" => "" }
@@ -37,4 +40,8 @@
           = alert
           %a.close{ href: "#" } &times;
       = yield
+      - if content_for?(:side) && content_for?(:body)
+        .body-with-side-bar
+          .side-bar= yield(:side)
+          .body= yield(:body)
     = javascript_include_tag "application"

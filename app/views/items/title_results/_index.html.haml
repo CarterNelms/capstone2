@@ -1,10 +1,10 @@
 - dirname = "items/title_results"
-#titles{ :"data-count" => @results.length }
+#titles{ class: "columns-#{@results.length}" }
   - Item.type_symbols_plural.each do |s|
     - if @results[s]
       %div{ id: s }
         %ul
-          - @results[s].each do | result |
+          - Kaminari.paginate_array(@results[s]).page(1).per(3).each do | result |
             - @item_data = {}
             = render partial: "#{dirname}/#{s.to_s}", locals: { result: result }
             - @item_data[:type] = s.to_s.classify.constantize
@@ -15,3 +15,4 @@
               = f.input :type, input_html: { value: @item_data[:type] }
               = f.submit "I Have This", name: :library
               = f.submit "I Want This", name: :wanted_list
+}

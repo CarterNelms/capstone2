@@ -9,6 +9,7 @@ gem "haml-rails"
 # gem 'imdb', '~> 0.8'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
+gem 'kaminari'
 gem 'letter_opener', :group => :development
 # gem 'omniauth'
 gem 'pg', '~> 0.17.1'

@@ -1,19 +1,53 @@
-// Place all the styles related to the entire application.
+// Place all the styles and variables related to the entire application.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import "foundation";
+$main-height: calc(100vh - #{$topbar-height});
 
-nav{
-  height: 10vh;
+body{
+  height: 100vh;
+}
 
+nav.main{
   @include grid-row();
 
-  // > *{
-  //   @include grid-column(6);
-  // }
+  min-width: 100%;
+
+  > *{
+    @include grid-column(6);
+  }
+
+  ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+
+    li{display: inline;}
+  }
+}
+
+nav:not(.main){
+  background-color: $silver;
+  color: $jet;
+  height: 75px;
 }
 
 main{
-  height: 90vh;
-  background-color: red;
+  margin-top: $topbar-height;
+}
+
+.body-with-side-bar{
+  @include grid-row();
+
+  min-width: 100%;
+
+  .side-bar{
+    @include grid-column(3);
+    // a{position: fixed;}
+  }
+  .body{@include grid-column(9);}
+}
+
+@media #{$small-only}{
+  .body-with-side-bar{ .side-bar, .body{ @include grid-column(12); } }
 }

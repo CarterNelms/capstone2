@@ -1,0 +1,70 @@
+// Place all the styles related to the Items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Titles -------------------------------------------------
+
+.simple_form.titles{
+
+  @include grid-row();
+
+  input[type="text"]{ @include grid-column(3) }
+  input[type="submit"]{ @include grid-column(3) }
+
+  @for $count from 1 through 4{
+    &.columns-#{$count}{ .input.boolean{ @include grid-column(6/$count); } }
+  }
+}
+
+#titles{
+  @include grid-row();
+
+  width: 100%;
+  max-width: 100%;
+
+  > *{
+    @include grid-column(12);
+    // height: $main-height;
+  }
+
+  #books{ background-color: blue }
+  #movies{ background-color: red; }
+  #video_games{ background-color: green; }
+
+  @for $count from 1 through 4{
+    &.columns-#{$count}{ > *{ @include grid-column(12/$count); } }
+  }
+}
+
+@media #{$small-only}{
+  #titles{
+    @for $count from 1 through 4{
+      &.columns-#{$count}{ > *{ @include grid-column(12); } }
+    }
+  }
+
+  .simple_form.titles{
+
+    @include grid-row();
+
+    input[type="text"]{ @include grid-column(9) }
+    input[type="submit"]{ @include grid-column(3) }
+
+    @for $count from 1 through 4{
+      &.columns-#{$count}{ .input.boolean{ @include grid-column(12/$count); } }
+    }
+  }
+}
+
+// Items -------------------------------------------------
+
+.field.condition{
+  @include grid-row();
+
+  select{@include grid-column(6);}
+  :not(select){@include grid-column(12);}
+}
+
+@media #{$small-only}{
+  .field.condition{ select{ @include grid-column(12); } }
+}

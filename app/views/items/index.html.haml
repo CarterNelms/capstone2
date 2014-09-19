@@ -1,16 +1,17 @@
 %h3 All Items
-/ = simple_form_for :item do |f|
-/   = f.input :name
-/   = f.submit "Search"
 
-= search_form_for @search, url: search_items_path, method: :post do |f|
-  = f.condition_fields do |c|
-    = render "condition_fields", f: c
-  %p= link_to_add_fields "Add Conditions", f, :condition
-  .field
-    Sort:
-    = f.sort_fields do |s|
-      = s.sort_select
-  .actions= f.submit "Search"
+- content_for(:side) do
+  = search_form_for @search, url: search_items_path, method: :post do |f|
+    = f.condition_fields do |c|
+      = render "condition_fields", f: c
+    %p= link_to_add_fields "Add Conditions", f, :condition
+    .field
+      Sort:
+      = f.sort_fields do |s|
+        = s.sort_select
+    .actions= f.submit "Search"
 
-= render "items_list"
+- content_for(:body) do
+  %ul
+    - @items.each do | item |
+      %li= item.name

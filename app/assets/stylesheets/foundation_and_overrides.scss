@@ -128,7 +128,7 @@ $include-html-global-classes: $include-html-classes;
 // $silver      : #EFEFEF;
 // $smoke       : #EEEEEE;
 // $gainsboro   : #DDDDDD;
-// $iron        : #CCCCCC;
+$iron        : #CCCCCC;
 // $base        : #AAAAAA;
 // $aluminum    : #999999;
 // $jumbo       : #888888;
@@ -200,6 +200,7 @@ $include-html-global-classes: $include-html-classes;
 // $header-font-weight: $font-weight-normal;
 // $header-font-style: normal;
 // $header-font-color: $jet;
+$header-font-color: $iron;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;
@@ -1365,7 +1366,9 @@ $include-html-global-classes: $include-html-classes;
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin
+
 // $topbar-height: 45px;
+$topbar-height: 60px;
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
@@ -1440,4 +1443,6 @@ $include-html-global-classes: $include-html-classes;
 // $include-legacy-visibility-classes: true;
 // $include-accessibility-classes: true;
 
-@import 'foundation';
+@import "foundation";
+@import "layout";
+@import "application/*";
