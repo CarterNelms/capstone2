@@ -30,7 +30,7 @@
           %li= link_to "Titles", titles_path
       - if content_for?(:nav)
         %nav.top-bar= yield(:nav)
-    %main
+    %main{class: content_for?(:nav) ? "with-nav2" : ""}
       - if notice.present?
         .alert-box.success{ "data-alert" => "" }
           = notice

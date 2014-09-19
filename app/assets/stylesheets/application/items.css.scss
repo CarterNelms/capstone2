@@ -8,22 +8,27 @@
 
   @include grid-row();
 
-  input[type="text"]{ @include grid-column(3) }
-  input[type="submit"]{ @include grid-column(3) }
+  min-width: 100%;
+  > *{ margin-top: 15px; }
+
+  .input.string{ @include grid-column($total-columns/3) }
+  input[type="submit"]{ @include grid-column($total-columns/6) }
+
+  input[type="text"]{ width: 100%; }
+  .input-boolean{ *{ display: inline-block; } }
 
   @for $count from 1 through 4{
-    &.columns-#{$count}{ .input.boolean{ @include grid-column(6/$count); } }
+    &.columns-#{$count}{ .input.boolean{ @include grid-column(($total-columns/2)/$count); } }
   }
 }
 
 #titles{
   @include grid-row();
 
-  width: 100%;
-  max-width: 100%;
+  min-width: 100%;
 
   > *{
-    @include grid-column(12);
+    @include grid-column($total-columns);
     // height: $main-height;
   }
 
@@ -32,26 +37,33 @@
   #video_games{ background-color: green; }
 
   @for $count from 1 through 4{
-    &.columns-#{$count}{ > *{ @include grid-column(12/$count); } }
+    &.columns-#{$count}{ > *{ @include grid-column($total-columns/$count); } }
   }
 }
 
-@media #{$small-only}{
+@media #{$medium-only}{
   #titles{
+    @for $count from 3 through 4{
+      &.columns-#{$count}{ > *{ @include grid-column($total-columns/2); } }
+    }
+  }  
+}
+
+@media #{$small-only}{
+  .simple_form.titles{
+    > *{ margin-top: 0; }
+
+    .input.string{ @include grid-column($total-columns*3/4); }
+    input[type="submit"]{ @include grid-column($total-columns/4); }
+
     @for $count from 1 through 4{
-      &.columns-#{$count}{ > *{ @include grid-column(12); } }
+      &.columns-#{$count}{ .input.boolean{ @include grid-column($total-columns/$count); } }
     }
   }
 
-  .simple_form.titles{
-
-    @include grid-row();
-
-    input[type="text"]{ @include grid-column(9) }
-    input[type="submit"]{ @include grid-column(3) }
-
+  #titles{
     @for $count from 1 through 4{
-      &.columns-#{$count}{ .input.boolean{ @include grid-column(12/$count); } }
+      &.columns-#{$count}{ > *{ @include grid-column($total-columns); } }
     }
   }
 }
@@ -61,10 +73,10 @@
 .field.condition{
   @include grid-row();
 
-  select{@include grid-column(6);}
-  :not(select){@include grid-column(12);}
+  select{@include grid-column($total-columns/2);}
+  :not(select){@include grid-column($total-columns);}
 }
 
 @media #{$small-only}{
-  .field.condition{ select{ @include grid-column(12); } }
+  .field.condition{ select{ @include grid-column($total-columns); } }
 }
