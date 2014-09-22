@@ -4,7 +4,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'devise'
 gem 'figaro'
 gem 'foundation'
-gem 'foundation-rails'
+gem 'foundation-rails', '5.4.3.1'
 gem 'haml'
 gem "haml-rails"
 gem 'jbuilder', '~> 2.0'
