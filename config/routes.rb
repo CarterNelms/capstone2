@@ -12,17 +12,17 @@ Rails.application.routes.draw do
     resources :wanted_lists, only: [:index]
   end
 
-  resources :items, only: [:index, :create, :new] do
+  match '/titles', to: "items#titles", via: [:get, :post]
+  get "/items/new_wanted", to: "items#new_wanted"
+  get "/items/from_title", to: "items#from_title"
+  get "/items/search", to: "items#index"
+
+  resources :items do
     collection { post :search, to: 'items#index' }
   end
   # namespace :items do
   #   resources :movies, only: [:show]
   # end
-
-  match '/titles', to: "items#titles", via: [:get, :post]
-  get "/items/new_wanted", to: "items#new_wanted"
-  get "/items/from_title", to: "items#from_title"
-  get "/items/search", to: "items#index"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

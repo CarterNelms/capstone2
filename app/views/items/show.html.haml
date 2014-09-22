@@ -1,0 +1,7 @@
+%p= @item.name
+
+- if @item.user == current_user
+  = simple_form_for @item, url: item_path(@item), method: "DELETE" do |f|
+    = f.submit "Delete"
+  = simple_form_for @item, url: edit_item_path(@item), method: "GET" do |f|
+    = f.submit "Edit"

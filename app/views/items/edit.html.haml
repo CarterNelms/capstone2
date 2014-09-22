@@ -1,0 +1,9 @@
+= simple_form_for @item, url: item_path do |f|
+  = f.input :name, label: "Item name"
+  - item_type_names = Item.type_names
+  = f.input :type, label: "Item type", collection: item_type_names
+  = f.label "Rent terms"
+  = f.input :min_duration
+  = f.input :max_duration
+  = f.input :rate
+  = f.submit "Save Changes"

@@ -2,6 +2,6 @@
 - if current_user
   %ul
     - current_user.library.items.each do |i|
-      %li= i.name
+      %li= link_to i.name, item_path(i)
   
 =link_to "Add New Item", new_item_path
