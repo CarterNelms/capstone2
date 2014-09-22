@@ -71,15 +71,24 @@ class ItemsController < ApplicationController
     ItemList.where("type = ?", type).reduce([]){ |items, current_library| items.concat(current_library.items) }
   end
 
-  def movies_api(keywords)
-    Unirest.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=tntv5r3367ajeyw9w9wd862g&q=#{keywords}",).body["movies"]
+  def books_api(keywords)
+    puts "BOOKS"
+    puts ENV["BOOKS_KEY1"]
+    puts ENV["books_key2"]
+    puts Figaro.env.books_key3
+    puts Figaro.env.BOOKS_KEY4
+    Unirest.get("https://www.googleapis.com/books/v1/volumes?key=#{ENV["books_key"]}&q=#{keywords}",).body["items"]
   end
 
-  def books_api(keywords)
-    Unirest.get("https://www.googleapis.com/books/v1/volumes?key=AIzaSyDI-BNrGVVsqwFNAhzqWJ2CcZ_d8wW74us&q=#{keywords}",).body["items"]
+  def movies_api(keywords)
+    puts "MOVIES"
+    puts ENV["movies_key"]
+    Unirest.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=#{ENV["movies_key"]}&q=#{keywords}",).body["movies"]
   end
 
   def video_games_api(keywords)
-    Unirest.get("http://www.giantbomb.com/api/search/?api_key=62b3d37a57d0c862feb6d6c96ad75e3d152499af&format=json&query=#{keywords}&resources=game").body["results"]
+    puts "VIDEO GAMES"
+    puts ENV["video_games_key"]
+    Unirest.get("http://www.giantbomb.com/api/search/?api_key=#{ENV["video_games_key"]}&format=json&query=#{keywords}&resources=game").body["results"]
   end
 end
