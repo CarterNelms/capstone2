@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140913201710) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "item_lists", force: true do |t|
     t.integer  "user_id"
     t.datetime "created_at"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140913201710) do
     t.integer  "item_ids"
   end
 
-  add_index "item_lists", ["user_id"], name: "index_item_lists_on_user_id"
+  add_index "item_lists", ["user_id"], name: "index_item_lists_on_user_id", using: :btree
 
   create_table "items", force: true do |t|
     t.integer  "item_list_id"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140913201710) do
     t.decimal  "rate"
   end
 
-  add_index "items", ["item_list_id"], name: "index_items_on_item_list_id"
+  add_index "items", ["item_list_id"], name: "index_items_on_item_list_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -57,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140913201710) do
     t.integer  "wanted_list_id"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
