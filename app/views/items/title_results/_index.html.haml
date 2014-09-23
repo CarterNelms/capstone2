@@ -1,4 +1,5 @@
 - dirname = "items/title_results"
+- @results.select!{ |key, r| !r.empty? }
 #titles{ class: "columns-#{@results.length}" }
   - Item.type_symbols_plural.each do |s|
     - if @results[s]
@@ -7,10 +8,10 @@
           - Kaminari.paginate_array(@results[s]).page(1).per(3).each do | result |
             - @item_data = {}
             = render partial: "#{dirname}/#{s.to_s}", locals: { result: result }
-            - @item_data[:type] = s.to_s.classify.constantize
+            - @item_data[:type] = s.to_s.classify.constantize.proper_class_name
             %li= @item_data[:name]
             %li= image_tag @item_data[:image]
-            = simple_form_for :item, url: items_from_title_path, method: :get,defaults: { as: :hidden } do |f|
+            = simple_form_for :item, url: items_from_title_path, method: :get, defaults: { as: :hidden } do |f|
               = f.input :name, input_html: { value: @item_data[:name] }
               = f.input :type, input_html: { value: @item_data[:type] }
               = f.submit "I Have This", name: :library

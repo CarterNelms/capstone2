@@ -16,8 +16,8 @@ feature "User signs up" do
     visit '/'
     click_link "Sign Up"
     fill_in "Email", with: "user1@example.com"
-    find(".user_password").fill_in "Password", with: "password1"
-    find(".user_password_confirmation").fill_in "Password confirmation", with: "password1"
+    fill_in "Password", with: "password1", :match => :prefer_exact
+    fill_in "Password confirmation", with: "password1"
     clear_emails
     click_button "Sign up"
   end
@@ -45,13 +45,30 @@ feature "User signs up" do
     page.should have_content("Signed in successfully.")
   end
 
-  scenario "Skipped email and password" do
-    pending "decide upon behavior when empty field is submitted"
+  scenario "Skipped email" do
     visit '/'
     click_link "Sign Up"
-    click_button "Create My Account"
-    page.should have_content("Your account could not be created.")
-    page.should have_error("can't be blank", on: "Email")
-    page.should have_error("can't be blank", on: "Password")
+    fill_in "Password", with: "password1", :match => :prefer_exact
+    fill_in "Password confirmation", with: "password1"
+    click_button "Sign up"
+    page.should have_content("Emailcan't be blank")
+  end
+
+  scenario "Skipped password" do
+    visit '/'
+    click_link "Sign Up"
+    fill_in "Email", with: "user2@example.com"
+    click_button "Sign up"
+    page.should have_content("Passwordcan't be blank")
+  end
+
+  scenario "Email in use" do
+    visit '/'
+    click_link "Sign Up"
+    fill_in "Email", with: "user1@example.com"
+    fill_in "Password", with: "password1", :match => :prefer_exact
+    fill_in "Password confirmation", with: "password1"
+    click_button "Sign up"
+    page.should have_content("Emailhas already been taken")
   end
 end

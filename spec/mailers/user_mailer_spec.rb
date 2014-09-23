@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe UserMailer, :type => :mailer do
-  pending "email must be returned in order to test it"
+  # pending "email must be returned in order to test it"
   # let!(:user) { Fabricate(:user) }
   # let!(:mail) { user.send_reset_password_instructions }
 

@@ -22,7 +22,7 @@ feature "User adds an item from title search to his wanted list" do
 
   scenario "Happy Path, User adds a title to his wanted list" do
 
-    fill_in "Keywords", with: "how i learned to stop worrying and love the bomb"
+    fill_in "titles_keywords", with: "how i learned to stop worrying and love the bomb"
     uncheck "Books"
     check "Movies"
     uncheck "Video games"

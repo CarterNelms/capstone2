@@ -22,7 +22,7 @@ feature "User searches existing titles" do
   end
 
   scenario "Happy Path, User visits his library" do
-    fill_in "Keywords", with: "lord of the rings"
+    fill_in "titles_keywords", with: "lord of the rings"
     click_button "Search"
 
     page.should have_content "The Fellowship of the Ring"

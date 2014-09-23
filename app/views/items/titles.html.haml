@@ -1,7 +1,7 @@
 - content_for(:nav) do
   - type_symbols = Item.type_symbols_plural
   = simple_form_for :titles, html: { class: "titles columns-#{type_symbols.length}" } do |f|
-    = f.input :keywords, input_html: { value: @input[:keywords] }
+    = f.input :keywords, label: false, input_html: { value: @input[:keywords] }
     = f.submit "Search"
     - type_symbols.each do |s|
       = f.input s, as: :boolean, input_html: { checked: @input[s] != "0" }

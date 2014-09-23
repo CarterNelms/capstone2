@@ -22,7 +22,7 @@ feature "User filters title searches by type" do
   end
 
   scenario "Happy Path, User visits his library" do
-    fill_in "Keywords", with: "lord of the rings"
+    fill_in "titles_keywords", with: "lord of the rings"
     uncheck "Books"
     check "Movies"
     uncheck "Video games"

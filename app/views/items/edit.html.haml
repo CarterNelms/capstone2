@@ -1,4 +1,4 @@
-= simple_form_for @item, url: item_path do |f|
+= simple_form_for @item, as: :item, url: item_path do |f|
   = f.input :name, label: "Item name"
   - item_type_names = Item.type_names
   = f.input :type, label: "Item type", collection: item_type_names

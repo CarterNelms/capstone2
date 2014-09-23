@@ -54,7 +54,8 @@ class ItemsController < ApplicationController
       method_name = "add_to_#{is_wanted ? 'wanted_list' : 'library'}"
       if current_user.send(method_name, item)
         flash.notice = "#{item.name} (#{item.proper_class_name}) has successfully been added to your #{is_wanted ? 'list of wanted items' : 'library'}."
-        redirect_to is_wanted ? user_wanted_lists_path(current_user) : user_libraries_path(current_user)
+        # redirect_to is_wanted ? user_wanted_lists_path(current_user) : user_libraries_path(current_user)
+        redirect_to user_path(current_user)
       else
         flash.alert = "Item could not be created"
         redirect_to new_item_path
@@ -73,9 +74,17 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def update
+    attributes = params[:item].select{ |key, p| !p.blank? }.permit(:name)
+
+    Item.update(params[:id], attributes)
+
+    redirect_to user_path(current_user)
+  end
+
   def destroy
     Item.destroy(params[:id])
-    redirect_to user_libraries_path(current_user)
+    redirect_to user_path(current_user)
   end
 
   private
