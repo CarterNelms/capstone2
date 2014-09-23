@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :users, only: [:index, :show] do
-    resources :libraries, only: [:index]
-    resources :wanted_lists, only: [:index]
-  end
+  resources :users, only: [:index, :show] # do
+  #   resources :libraries, only: [:index]
+  #   resources :wanted_lists, only: [:index]
+  # end
 
   match '/titles', to: "items#titles", via: [:get, :post]
   get "/items/new_wanted", to: "items#new_wanted"

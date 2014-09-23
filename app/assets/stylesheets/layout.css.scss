@@ -13,17 +13,17 @@ nav.main{
 
   min-width: 100%;
 
-  > *{ @include grid-column($total-columns/2); }
-  
-  * { margin: 0; }
+  > *{
+    @include grid-column($total-columns/2);
+    height:$topbar-height;
+  }
 
-  ul{
-    list-style-type: none;
+  .links{
     margin: 0;
     padding: 0;
-    text-align: right;
+    text-align: left;
 
-    li{display: inline;}
+    a{@include grid-column($total-columns/4);}
   }
 }
 
@@ -51,5 +51,17 @@ main{
 }
 
 @media #{$small-only}{
+  nav.main{
+
+    $logo-column-count: $total-columns/3;
+    $link-column-count: $total-columns - $logo-column-count;
+    $links-column-count: $total-columns/4;
+
+    > :first-child{ @include grid-column($logo-column-count); }
+    > :last-child{ @include grid-column($link-column-count); }
+
+    .links a{ @include grid-column($links-column-count); }
+  }
+
   .body-with-side-bar{ .side-bar, .body{ @include grid-column($total-columns); } }
 }

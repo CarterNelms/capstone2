@@ -14,20 +14,20 @@
           %h2.title
             / = image_tag "POGO_10.090_OCA.svg", class: "logo"
             Capstone2
-        %ul
+        .links
           - if user_signed_in?
-            %li= link_to "Profile", user_path(current_user) 
-            %li= link_to "Sign Out", destroy_user_session_path, method: :delete
+            = link_to "Profile", user_path(current_user) 
+            = link_to "Sign Out", destroy_user_session_path, method: :delete
           - else
-            %li= link_to "Sign In", new_user_session_path
-            %li= link_to "Sign Up", new_user_registration_path
+            = link_to "Sign In", new_user_session_path
+            = link_to "Sign Up", new_user_registration_path
           / %li
           /   %form{method: "GET", action: items_search_path}
           /     %input{type: 'text', placeholder: 'Search'}
           /     %input{type: 'submit'}
           / %li= "Search", items_search_path
-          %li= link_to "Listings", items_path
-          %li= link_to "Titles", titles_path
+          = link_to "Listings", items_path
+          = link_to "Titles", titles_path
       - if content_for?(:nav)
         %nav.top-bar= yield(:nav)
     %main{class: content_for?(:nav) ? "with-nav2" : ""}

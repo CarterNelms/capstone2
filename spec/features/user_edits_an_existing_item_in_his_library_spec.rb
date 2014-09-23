@@ -22,8 +22,8 @@ feature "User edits and existing item in his library" do
     click_button "Sign in"
   end
 
-  scenario "Happy Path, User deletes an item" do
-    visit user_libraries_path(user)
+  scenario "Happy Path, User edits an item" do
+    visit user_path(user)
 
     page.should have_content book.name
     click_link book.name
@@ -33,7 +33,7 @@ feature "User edits and existing item in his library" do
     fill_in "Item name", with: new_name
     click_button "Save Changes"
 
-    current_path should == user_libraries_path(user)
+    current_path.should eq user_path(user)
     page.should have_content new_name
     page.should_not have_content old_name
   end

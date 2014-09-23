@@ -23,7 +23,7 @@ feature "User deletes an item from his library" do
   end
 
   scenario "Happy Path, User deletes an item" do
-    visit user_libraries_path(user)
+    visit user_path(user)
 
     page.should have_content book.name
 

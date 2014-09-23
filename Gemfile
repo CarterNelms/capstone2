@@ -5,6 +5,7 @@ gem 'devise'
 gem 'figaro'
 gem 'foundation'
 gem 'foundation-rails', '5.4.3.1'
+gem 'geocoder'
 gem 'haml'
 gem "haml-rails"
 gem 'jbuilder', '~> 2.0'

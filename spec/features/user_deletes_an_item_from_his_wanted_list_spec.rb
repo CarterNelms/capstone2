@@ -24,7 +24,7 @@ feature "User deletes an item from his wanted list" do
   end
 
   scenario "Happy Path, User deletes an item" do
-    visit user_wanted_lists_path(user)
+    visit user_path(user)
 
     page.should have_content book.name
 
