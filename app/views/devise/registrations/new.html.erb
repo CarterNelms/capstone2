@@ -7,6 +7,9 @@
     <%= f.input :email, required: true, autofocus: true %>
     <%= f.input :password, required: true %>
     <%= f.input :password_confirmation, required: true %>
+    <%= f.input :city, class: "location" %>
+    <%= f.input :state, collection: us_states, selected: "Alabama" %>
+    <div id="map"></div>
   </div>
 
   <div class="form-actions">
@@ -15,3 +18,9 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<%= content_for(:scripts) do %>
+  <!--<script type='text/javascript' src="//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry"></script-->
+  <script type='text/javascript' src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
+  <script type='text/javascript' src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"></script>
+<% end %>

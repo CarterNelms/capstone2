@@ -44,4 +44,8 @@
         .body-with-side-bar
           .side-bar= yield(:side)
           .body= yield(:body)
+    - if content_for?(:scripts)
+      = yield(:scripts)
+    :javascript
+      var x = 7;
     = javascript_include_tag "application"

@@ -50,6 +50,11 @@ main{
   .body{@include grid-column($total-columns*3/4);}
 }
 
+#map{
+  width: 800px;
+  height: 400px;
+}
+
 @media #{$small-only}{
   nav.main{
 
