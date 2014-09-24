@@ -5,7 +5,7 @@ $main-height: calc(100vh - #{$topbar-height});
 $topbar2-height: 75px;
 
 body{
-  height: 100vh;
+  height: $main-height;
 }
 
 nav.main{
@@ -51,8 +51,9 @@ main{
 }
 
 #map-canvas{
-  width: 800px;
-  height: 400px;
+  width: 100%;
+  height: $main-height;
+  min-height: 400px;
 }
 
 @media #{$small-only}{
@@ -69,4 +70,6 @@ main{
   }
 
   .body-with-side-bar{ .side-bar, .body{ @include grid-column($total-columns); } }
+
+  #map-canvas{ height: 400px;}
 }

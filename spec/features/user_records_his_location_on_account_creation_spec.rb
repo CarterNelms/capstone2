@@ -28,11 +28,11 @@ feature "User records his location on account creation" do
   end
 
   scenario "Happy Path, User chooses to provide his city and state" do
-    fill_in "City", with: "Nashville"
-    select "Tennessee", from: "State"
+    fill_in "Location", with: "Nashville, TN, United States"
     click_button "Sign up"
     user = User.find_by_email("user1@example.com")
-    user.latitude.should not_be nil
-    user.longitude.should not_be nil
+    user.location.should == "Nashville, TN, United States"
+    user.latitude.should be 36.166667
+    user.longitude.should be -86.783333
   end
 end

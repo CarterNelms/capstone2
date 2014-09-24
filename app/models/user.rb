@@ -8,11 +8,18 @@ class User < ActiveRecord::Base
 
   has_one :library
   has_one :wanted_list
-  before_create :create_item_lists
+  before_create :prepare_user
 
-  def create_item_lists
+  def prepare_user
     self.library = Library.create
     self.wanted_list = WantedList.create
+    # self.location = params[:user][:location]
+    # puts "================================"
+    # puts "================================"
+    # puts self.location
+    # puts "================================"
+    # puts "================================"
+    # self.
   end
 
   def add_to_library(item)

@@ -1,18 +1,18 @@
-%h2 Sign up
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-    = f.input :password, required: true
-    = f.input :password_confirmation, required: true
-  .form-actions
-    = f.button :submit, "Sign up"
-%form#form1{:action => "javascript:void(0);"}
-  .form-inputs
-    %input#user_city{:type => "text"}
-    #map-canvas
-  .form-actions
-    %button Submit
-= render "devise/shared/links"
-= content_for(:scripts) do
-  %script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"}
+- content_for(:side) do
+  %h2 Sign up
+  = simple_form_for resource, as: resource_name, url: registration_path(resource_name), defaults: { required: true } do |f|
+    = f.error_notification
+    .form-inputs
+      = f.input :email, autofocus: true
+      = f.input :password
+      = f.input :password_confirmation
+      = f.input :location
+    .form-actions
+      = f.button :submit, "Sign up"
+  = render "devise/shared/links"
+- content_for(:body) do
+  #map-canvas
+- content_for(:scripts) do
+  / %script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"}
+  = javascript_include_tag "https://www.google.com/jsapi"
+  / %script{src: "https://www.google.com/jsapi"}
