@@ -9,8 +9,7 @@
     = f.button :submit, "Sign up"
 %form#form1{:action => "javascript:void(0);"}
   .form-inputs
-    %input#user_city{:type => "text"}/
-    / %= f.input :state, collection: us_states, selected: "Alabama" %
+    %input#user_city{:type => "text"}
     #map-canvas
   .form-actions
     %button Submit

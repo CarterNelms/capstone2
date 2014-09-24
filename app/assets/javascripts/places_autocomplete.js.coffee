@@ -1,41 +1,35 @@
-jQuery ->
-  # Autocomplete variables
-  input = $('input#user_city')[0]
-  searchform = $('form#form1')[0]
-  place = null
-  autocomplete = new google.maps.places.Autocomplete(input)
+# Autocomplete variables
+$input = $('input#user_city')
+input = $input[0]
+place = null
+autocomplete = new google.maps.places.Autocomplete(input)
 
-  # Google Map variables
-  map = null
-  marker = null
+# Google Map variables
+map = null
+marker = null
 
-  # Add listener to detect autocomplete selection
-  google.maps.event.addListener autocomplete, 'place_changed', () ->
+# # The location field should be empty initially
+# $input.val('')
+
+initialize = () ->
+  myLatlng = new google.maps.LatLng(36.1667,-86.7833)
+  mapOptions = {zoom: 2, center: myLatlng}
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
+
+  updateMap = (targetPlace=null) ->
+    # place = if targetPlace then autocomplete.getPlace(targetPlace) else autocomplete.getPlace()
     place = autocomplete.getPlace()
-
-  # Add listener to search
-  searchform.addEventListener "submit", () ->
     newlatlong = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng())
+    marker = new google.maps.Marker({ map: map }) if !marker
+    marker.setTitle($input.val())
     map.setCenter(newlatlong)
     marker.setPosition(newlatlong)
     map.setZoom(12)
-   
-  # Reset the input box on click
-  input.addEventListener 'click', () ->
-    input.value = ""
 
+  # updateMap($input.val)
 
+  # Add listener to detect autocomplete selection
+  google.maps.event.addListener autocomplete, 'place_changed', updateMap
 
-  initialize = () ->
-    myLatlng = new google.maps.LatLng(51.517503,-0.133896)
-    mapOptions = {zoom: 1, center: myLatlng}
-
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
-
-    marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'Main map'
-    })
-
-  google.maps.event.addDomListener(window, 'load', initialize)
+google.maps.event.addDomListener(window, 'load', initialize)
