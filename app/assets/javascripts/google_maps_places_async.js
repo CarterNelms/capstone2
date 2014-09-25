@@ -1,66 +1,66 @@
-var $input;
+// var $input;
 
-function loadMap() {
+// function loadMap() {
 
-  var input = $input[0];
-  var place = null;
-  var autocomplete = new google.maps.places.Autocomplete(input);
+//   var input = $input[0];
+//   var place = null;
+//   var autocomplete = new google.maps.places.Autocomplete(input);
 
-  // Google Map variables
-  var map = null;
-  var marker = null;
+//   // Google Map variables
+//   var map = null;
+//   var marker = null;
 
-  function initMap(){
-    var myLatlng = new google.maps.LatLng(36.1667,-86.7833);
-    var mapOptions = {zoom: 2, center: myLatlng};
+//   function initMap(){
+//     var myLatlng = new google.maps.LatLng(36.1667,-86.7833);
+//     var mapOptions = {zoom: 2, center: myLatlng};
 
-    map = new google.maps.Map($map[0], mapOptions);
+//     map = new google.maps.Map($map[0], mapOptions);
 
-    function updateMap(){
-      // place = if targetPlace then autocomplete.getPlace(targetPlace) else autocomplete.getPlace()
-      // if(!coordinates){
-      place = autocomplete.getPlace();
-      var coordinates = {
-        latitude: place.geometry.location.lat(),
-        longitude: place.geometry.location.lng()
-      };
-      // }
-      var newlatlong = new google.maps.LatLng(coordinates.latitude, coordinates.longitude);
-      if(!marker){marker = new google.maps.Marker({ map: map });}
-      marker.setTitle($input.val());
-      map.setCenter(newlatlong);
-      marker.setPosition(newlatlong);
-      map.setZoom(12);
-    }
+//     function updateMap(){
+//       // place = if targetPlace then autocomplete.getPlace(targetPlace) else autocomplete.getPlace()
+//       // if(!coordinates){
+//       place = autocomplete.getPlace();
+//       var coordinates = {
+//         latitude: place.geometry.location.lat(),
+//         longitude: place.geometry.location.lng()
+//       };
+//       // }
+//       var newlatlong = new google.maps.LatLng(coordinates.latitude, coordinates.longitude);
+//       if(!marker){marker = new google.maps.Marker({ map: map });}
+//       marker.setTitle($input.val());
+//       map.setCenter(newlatlong);
+//       marker.setPosition(newlatlong);
+//       map.setZoom(12);
+//     }
 
-    // if(typeof(coords) != 'undefined'){ updateMap(coords); }
+//     // if(typeof(coords) != 'undefined'){ updateMap(coords); }
 
-    // Add listener to detect autocomplete selection
-    google.maps.event.addListener(autocomplete, 'place_changed', updateMap);
-  }
+//     // Add listener to detect autocomplete selection
+//     google.maps.event.addListener(autocomplete, 'place_changed', updateMap);
+//   }
 
-  initMap();
-}
+//   initMap();
+// }
 
-$(function(){
+// $(function(){
 
-  $input = $('input#user_location');
-  $map = $('#map-canvas');
+//   $input = $('input#user_location');
+//   $map = $('#map-canvas');
 
-  // The location field should be empty initially
-  // $input.val('')
+//   // The location field should be empty initially
+//   // $input.val('')
 
-  function loadScript(){
-    script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&callback=loadMap';
-    document.body.appendChild(script);
-  }
+//   function loadScript(){
+//     script = document.createElement('script');
+//     script.type = 'text/javascript';
+//     script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&callback=loadMap';
+//     document.body.appendChild(script);
+//   }
 
-  if(typeof(google) != 'undefined' && $map.length){
-    var shouldLoadScript = typeof(google.maps) == 'undefined';
-    var nextStep = shouldLoadScript ? loadScript : loadMap;
-    $(document).ready(nextStep);
-  }
-  // $(document).ready(loadScript)
-});
+//   if(typeof(google) != 'undefined' && $map.length){
+//     var shouldLoadScript = typeof(google.maps) == 'undefined';
+//     var nextStep = shouldLoadScript ? loadScript : loadMap;
+//     $(document).ready(nextStep);
+//   }
+//   // $(document).ready(loadScript)
+// });
