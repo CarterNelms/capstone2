@@ -4,6 +4,12 @@
 
 // Titles -------------------------------------------------
 
+@mixin item-colors($color){
+  $lightness-delta: -40%;
+  background-color: $color;
+  border: 3px double scale-color($color, $lightness: $lightness-delta);
+}
+
 .simple_form.titles{
 
   @include grid-row();
@@ -32,9 +38,18 @@
     // height: $main-height;
   }
 
-  #books{ background-color: blue }
-  #movies{ background-color: red; }
-  #video_games{ background-color: green; }
+  @include item-colors($item-color);
+  border-radius: 5px;
+
+  #books{
+    @include item-colors($book-color);
+  }
+  #movies{
+    @include item-colors($movie-color);
+  }
+  #video_games{
+    @include item-colors($videogame-color);
+  }
 
   @for $count from 1 through 4{
     &.columns-#{$count}{ > *{ @include grid-column($total-columns/$count); } }
@@ -52,23 +67,24 @@
     }
   }
 
-  $lightness-delta: -40%;
-
-  border: 3px double scale-color($item-color, $lightness: $lightness-delta);
+  @include item-colors($item-color);
   border-radius: 5px;
+  color: $white;
+
+  a{
+    color: $white;
+    &:hover{ color: $white; }
+  }
 
   background-color: $item-color;
   &.book{
-    background-color: $book-color;
-    border-color: scale-color($book-color, $lightness: $lightness-delta);
+    @include item-colors($book-color);
   }
   &.movie{
-    background-color: $movie-color;
-    border-color: scale-color($movie-color, $lightness: $lightness-delta);
+    @include item-colors($movie-color);
   }
   &.videogame{
-    background-color: $videogame-color;
-    border-color: scale-color($videogame-color, $lightness: $lightness-delta);
+    @include item-colors($videogame-color);
   }
 }
 

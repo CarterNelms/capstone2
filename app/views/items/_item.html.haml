@@ -1,13 +1,13 @@
-/ = link_to item_path(item) do
-.item{class: "#{item.type.downcase}"}
-  %ul
-    %li= link_to item.name, item_path(item)
-    - if !item.images.blank?
-      %li
-        = link_to item_path(item) do
-          .img-wrap= image_tag item.images
-    %li= image_tag "icons/#{item.type.downcase}.png"
-    / - if item.user
-    /   %li
-    /     Owned by
-    /     = link_to item.user.username, user_path(item.user)}
+%a{href: item_path(item) }
+  .item{class: "#{item.type.downcase}"}
+    %ul
+      %li= item.name
+      - if !item.images.blank?
+        %li
+          = link_to item_path(item) do
+            .img-wrap= image_tag item.images
+      %li= image_tag "icons/#{item.type.downcase}.png"
+      / - if item.user
+      /   %li
+      /     Owned by
+      /     = link_to item.user.username, user_path(item.user)}

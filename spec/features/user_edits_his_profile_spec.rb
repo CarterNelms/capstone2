@@ -44,6 +44,16 @@ feature "User edits his profile" do
     User.last.email.should == "newemail@example.com"
   end
 
+  scenario "Happy Path, User edits his username" do
+    click_link "Profile"
+    click_link "Edit Profile"
+    fill_in "Username", with: "New Username"
+    fill_in "Current password", with: "password1"
+    click_button "Update"
+    new_user = User.last
+    new_user.username.should == "New Username"
+  end
+
   scenario "Happy Path, User edits his password" do
     old_encrypted_password = User.last.encrypted_password
     click_link "Profile"

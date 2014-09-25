@@ -58,8 +58,8 @@ $(function(){
   }
 
   if(typeof(google) != 'undefined' && $map.length){
-    shouldLoadScript = typeof(google.maps) == 'undefined';
-    nextStep = shouldLoadScript ? loadScript : loadMap;
+    var shouldLoadScript = typeof(google.maps) == 'undefined';
+    var nextStep = shouldLoadScript ? loadScript : loadMap;
     $(document).ready(nextStep);
   }
   // $(document).ready(loadScript)
