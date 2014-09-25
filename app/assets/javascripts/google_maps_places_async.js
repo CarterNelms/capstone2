@@ -16,16 +16,24 @@ function loadMap() {
 
     map = new google.maps.Map($map[0], mapOptions)
 
-    function updateMap(targetPlace=null){
+    function updateMap(coordinates=null){
       // place = if targetPlace then autocomplete.getPlace(targetPlace) else autocomplete.getPlace()
-      place = autocomplete.getPlace()
-      var newlatlong = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng())
+      if(!coordinates){
+        place = autocomplete.getPlace()
+        coordinates = {
+          latitude: place.geometry.location.lat(),
+          longitude: place.geometry.location.lng()
+        }
+      }
+      var newlatlong = new google.maps.LatLng(coordinates.latitude, coordinates.longitude)
       if(!marker){marker = new google.maps.Marker({ map: map })}
       marker.setTitle($input.val())
       map.setCenter(newlatlong)
       marker.setPosition(newlatlong)
       map.setZoom(12)
     }
+
+    updateMap(coords)
 
     // Add listener to detect autocomplete selection
     google.maps.event.addListener(autocomplete, 'place_changed', updateMap)

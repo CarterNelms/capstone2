@@ -46,4 +46,5 @@
           .body= yield(:body)
     - if content_for?(:scripts)
       = yield(:scripts)
+    = javascript_include_tag "https://www.google.com/jsapi"
     = javascript_include_tag "application"

@@ -10,5 +10,6 @@
   = f.input :min_duration, input_html: { value: number_with_precision(1, precision: 0) }
   = f.input :max_duration, input_html: { value: number_with_precision(7, precision: 0) }
   = f.input :rate, input_html: { value: number_with_precision(1, precision: 2) }
+  = f.input :description
   = f.hidden_field :wanted, :value => wanted
   = f.submit "Add New Item"

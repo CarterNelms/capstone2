@@ -11,7 +11,7 @@
       = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
       = f.input :password_confirmation, required: false
       = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
-      = f.input :location, input_html: {value: "hello"}
+      = f.input :location
     .form-actions
       = f.button :submit, "Update"
   %h3 Cancel my account
@@ -21,4 +21,5 @@
 - content_for(:body) do
   #map-canvas
 - content_for(:scripts) do
-  = javascript_include_tag "https://www.google.com/jsapi"
+  :javascript
+    var coords = { latitude: #{@user.latitude}, longitude: #{@user.longitude} };
