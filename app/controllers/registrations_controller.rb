@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_filter :configure_permitted_parameters if :devise_controller
   def create
     is_username_valid = false
     username = params[:user][:username]
@@ -14,5 +15,13 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     redirect_to (:back) if !is_username_valid
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    additional_attributes = [:username, :location]
+    devise_parameter_sanitizer.for(:sign_up) << additional_attributes
+    devise_parameter_sanitizer.for(:account_update) << additional_attributes
   end
 end

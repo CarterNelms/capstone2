@@ -4,11 +4,5 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  protected
-
-  def configure_permitted_parameters
-    additional_attributes = [:username, :location]
-    devise_parameter_sanitizer.for(:sign_up) << additional_attributes
-    devise_parameter_sanitizer.for(:account_update) << additional_attributes
-  end
+  
 end
