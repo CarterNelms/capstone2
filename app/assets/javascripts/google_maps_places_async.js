@@ -33,7 +33,7 @@ function loadMap() {
       map.setZoom(12)
     }
 
-    updateMap(coords)
+    if(typeof(coords) != 'undefined') updateMap(coords)
 
     // Add listener to detect autocomplete selection
     google.maps.event.addListener(autocomplete, 'place_changed', updateMap)

@@ -19,21 +19,34 @@ feature "User adds images to his items" do
     click_button "Sign in"
   end
 
-  scenario "Happy Path, User adds an image via url" do
+  # scenario "Happy Path, User adds an image via url" do
+  #   click_link "Profile"
+  #   click_link "new_library_item"
+  #   fill_in "Item name", with: "Skyrim"
+  #   select "Video Game", from: "Item type"
+  #   fill_in "Min duration", with: 3
+  #   fill_in "Max duration", with: 14
+  #   fill_in "Rate", with: 1
+  #   fill_in "Description", with: "This item is mine"
+
+  #   click_button "Add New Item"
+  #   user.library.items.last.description.should == "This item is mine"
+  # end
+
+  scenario "Happy Path, User uploads an image file" do
     click_link "Profile"
     click_link "new_library_item"
     fill_in "Item name", with: "Skyrim"
     select "Video Game", from: "Item type"
+    attach_file "item_images", "#{Rails.root}/spec/fixtures/images/blueberry_profile.png"
     fill_in "Min duration", with: 3
     fill_in "Max duration", with: 14
     fill_in "Rate", with: 1
     fill_in "Description", with: "This item is mine"
 
     click_button "Add New Item"
-    user.library.items.last.description.should == "This item is mine"
-  end
-
-  scenario "Happy Path, User uploads an image file" do
+    item = user.library.items.last
+    item.images.class.name.should == "ItemImageUploader"
   end
 end
 

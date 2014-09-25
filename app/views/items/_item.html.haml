@@ -1,0 +1,10 @@
+/ = link_to item_path(item) do
+.item
+  %ul
+    %li= item.name
+    / - if !item.images.blank?
+    %li= image_tag item.images
+    / - if item.user
+    /   %li
+    /     Owned by
+    /     = link_to item.user.username, user_path(item.user)

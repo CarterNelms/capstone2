@@ -98,25 +98,9 @@ $column-gutter: rem-calc(0);
 // $font-weight-normal: normal !default;
 // $font-weight-bold: bold !default;
 
-// We use these to control various global styles
-// $body-bg: $white;
-// $body-font-color: $jet;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-// $body-font-weight: $font-weight-normal;
-// $body-font-style: normal;
-
-// We use this to control font-smoothing
-// $font-smoothing: antialiased;
-
-// We use these to control text direction settings
-// $text-direction: ltr;
-// $opposite-direction: right;
-// $default-float: left;
-// $last-child-float: $opposite-direction;
-
 // We use these as default colors throughout
-// $primary-color: #008CBA;
-// $secondary-color: #e7e7e7;
+$primary-color: #005C8A;
+$secondary-color: #e7e7e7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
 // $warning-color: #f08a24;
@@ -141,6 +125,22 @@ $iron        : #CCCCCC;
 // $oil         : #333333;
 // $jet         : #222222;
 // $black       : #000000;
+
+// We use these to control various global styles
+$body-bg: $secondary-color;
+// $body-font-color: $jet;
+// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+// $body-font-weight: $font-weight-normal;
+// $body-font-style: normal;
+
+// We use this to control font-smoothing
+// $font-smoothing: antialiased;
+
+// We use these to control text direction settings
+// $text-direction: ltr;
+// $opposite-direction: right;
+// $default-float: left;
+// $last-child-float: $opposite-direction;
 
 // We use these to make sure border radius matches unless we want it different.
 // $global-radius: 3px;
@@ -202,7 +202,7 @@ $iron        : #CCCCCC;
 // $header-font-weight: $font-weight-normal;
 // $header-font-style: normal;
 // $header-font-color: $jet;
-$header-font-color: $iron;
+$header-font-color: $primary-color;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;
@@ -259,8 +259,10 @@ $header-font-color: $iron;
 // We use these to style anchors
 // $anchor-text-decoration: none;
 // $anchor-text-decoration-hover: none;
-// $anchor-font-color: $primary-color;
-// $anchor-font-color-hover: scale-color($primary-color, $lightness: -14%);
+$anchor-font-color: $primary-color;
+$anchor-font-color-hover: scale-color($primary-color, $lightness: -14%);
+$nav-anchor-font-color: $secondary-color;
+$nav-anchor-font-color-hover: scale-color($secondary-color, $lightness: -14%);
 
 // We use these to style the <hr> element
 // $hr-border-width: 1px;
@@ -1365,6 +1367,7 @@ $header-font-color: $iron;
 
 // Background color for the top bar
 // $topbar-bg-color: $oil;
+$topbar-bg-color: $primary-color;
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin

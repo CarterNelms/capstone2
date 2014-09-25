@@ -1,4 +1,10 @@
-%p= @item.name
+%ul
+  %li= @item.name
+  / - if !@item.images.blank?
+  %li= image_tag @item.images
+  %li
+    Owned by
+    = link_to @item.user.email, user_path(@item.user)
 
 - if @item.user == current_user
   = simple_form_for @item, url: item_path(@item), method: "DELETE" do |f|

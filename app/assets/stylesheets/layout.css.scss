@@ -25,6 +25,12 @@ nav.main{
 
     a{@include grid-column($total-columns/4);}
   }
+
+  h1, h2, h3, h4, h5, h6{ color: $secondary-color;}
+  a{
+    color: $nav-anchor-font-color;
+    &:hover{ color: $nav-anchor-font-color-hover; }
+  }
 }
 
 nav:not(.main){
@@ -55,6 +61,8 @@ main{
   height: $main-height;
   min-height: 400px;
 }
+
+textarea{resize: none;}
 
 @media #{$small-only}{
   nav.main{

@@ -4,9 +4,10 @@
     = f.error_notification
     .form-inputs
       = f.input :email, autofocus: true
+      = f.input :username
       = f.input :password
       = f.input :password_confirmation
-      = f.input :location
+      = f.input :location, required: false, hint: "Your location can be used to make it easier to find what you want, and for others to find what they want from you"
     .form-actions
       = f.button :submit, "Sign up"
   = render "devise/shared/links"

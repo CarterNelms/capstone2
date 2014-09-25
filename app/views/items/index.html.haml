@@ -12,6 +12,5 @@
     .actions= f.submit "Search"
 
 - content_for(:body) do
-  %ul
-    - @items.each do | item |
-      %li= item.name
+  - @items.each do | item |
+    = render partial: "item", locals: {item: item}

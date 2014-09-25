@@ -15,6 +15,7 @@ feature "User records his location on account creation" do
     visit '/'
     click_link "Sign Up"
     fill_in "Email", with: "user1@example.com"
+    fill_in "Username", with: "User1"
     fill_in "Password", with: "password1", :match => :prefer_exact
     fill_in "Password confirmation", with: "password1"
     clear_emails

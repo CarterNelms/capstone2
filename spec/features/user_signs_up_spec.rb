@@ -16,6 +16,7 @@ feature "User signs up" do
     visit '/'
     click_link "Sign Up"
     fill_in "Email", with: "user1@example.com"
+    fill_in "Username", with: "User1"
     fill_in "Password", with: "password1", :match => :prefer_exact
     fill_in "Password confirmation", with: "password1"
     clear_emails
@@ -25,6 +26,7 @@ feature "User signs up" do
   scenario "Happy Path, Sign Up" do
     current_path.should == root_path
     page.should have_content("A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.")
+    User.last.username.should == "User1"
 
     # click_link "Sign Out"
     # current_path.should == new_user_session_path
@@ -47,9 +49,22 @@ feature "User signs up" do
     page.should have_content("Signed in successfully.")
   end
 
+  scenario "Happy Path, Username can contain spaces, underscores, and hyphens" do
+    visit '/'
+    click_link "Sign Up"
+    fill_in "Email", with: "user2@example.com"
+    fill_in "Username", with: "User -_1"
+    fill_in "Password", with: "password1", :match => :prefer_exact
+    fill_in "Password confirmation", with: "password1"
+    clear_emails
+    click_button "Sign up"
+    User.last.username.should == "User -_1"
+  end
+
   scenario "Skipped email" do
     visit '/'
     click_link "Sign Up"
+    fill_in "Username", with: "User1"
     fill_in "Password", with: "password1", :match => :prefer_exact
     fill_in "Password confirmation", with: "password1"
     click_button "Sign up"
@@ -60,6 +75,7 @@ feature "User signs up" do
     visit '/'
     click_link "Sign Up"
     fill_in "Email", with: "user2@example.com"
+    fill_in "Username", with: "User1"
     click_button "Sign up"
     page.should have_content("Passwordcan't be blank")
   end
@@ -68,9 +84,54 @@ feature "User signs up" do
     visit '/'
     click_link "Sign Up"
     fill_in "Email", with: "user1@example.com"
+    fill_in "Username", with: "User1"
     fill_in "Password", with: "password1", :match => :prefer_exact
     fill_in "Password confirmation", with: "password1"
     click_button "Sign up"
-    # page.should have_content("Emailhas already been taken")
+    page.should have_content("Emailhas already been taken")
   end
+
+  scenario "Username blank" do
+    visit '/'
+    click_link "Sign Up"
+    fill_in "Email", with: "user2@example.com"
+    fill_in "Password", with: "password1", :match => :prefer_exact
+    fill_in "Password confirmation", with: "password1"
+    click_button "Sign up"
+    page.should have_content("Username must be at least five (5) characters long")
+  end
+
+  scenario "Username too short" do
+    visit '/'
+    click_link "Sign Up"
+    fill_in "Email", with: "user2@example.com"
+    fill_in "Username", with: "Usr1"
+    fill_in "Password", with: "password1", :match => :prefer_exact
+    fill_in "Password confirmation", with: "password1"
+    click_button "Sign up"
+    page.should have_content("Username must be at least five (5) characters long")
+  end
+
+  scenario "Username too long" do
+    visit '/'
+    click_link "Sign Up"
+    fill_in "Email", with: "user2@example.com"
+    fill_in "Username", with: "worldsmostawesomeuser"
+    fill_in "Password", with: "password1", :match => :prefer_exact
+    fill_in "Password confirmation", with: "password1"
+    click_button "Sign up"
+    page.should have_content("Username must be no more than sixteen (16) characters long")
+  end
+
+  # scenario "Username contains invalid characters"
+  #   visit '/'
+  #   click_link "Sign Up"
+  #   fill_in "Email", with: "user2@example.com"
+  #   fill_in "Username", with: "Bob!@#$"
+  #   fill_in "Password", with: "password1", :match => :prefer_exact
+  #   fill_in "Password confirmation", with: "password1"
+  #   click_button "Sign up"
+  #   page.should have_content("Username can contain letters, numbers, spaces, underscores (_) and dashes (-)")
+  #   current_path.should == new_user_registration_path
+  # end
 end

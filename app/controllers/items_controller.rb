@@ -51,6 +51,10 @@ class ItemsController < ApplicationController
       is_wanted = params["item"]["wanted"] == "true"
 
       item = model.create(item_params)
+      # params["item"]["images"].each do |i|
+      #   item.images = i
+      # end
+
       method_name = "add_to_#{is_wanted ? 'wanted_list' : 'library'}"
       if current_user.send(method_name, item)
         flash.notice = "#{item.name} (#{item.proper_class_name}) has successfully been added to your #{is_wanted ? 'list of wanted items' : 'library'}."

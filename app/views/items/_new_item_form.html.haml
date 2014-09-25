@@ -6,11 +6,12 @@
   / - [false, true].each do |is_hidden|
   /   = f.input :type, label: !is_hidden ? "Item type" : false, collection: item_type_names, :selected => autofill_params[:type] || item_type_names[0], input_html: { disabled: (is_hidden && autofill_params.empty?) || !(is_hidden || autofill_params.empty?), hidden: is_hidden }
   = f.input :type, label: "Item type", collection: item_type_names, :selected => autofill_params[:type] || item_type_names[0]
-  = f.file_field :images, multiple: true
+  = f.file_field :images, required: false #, multiple: true
+  / = f.input :image_url, required: false
   = f.label "Rent terms"
   = f.input :min_duration, input_html: { value: number_with_precision(1, precision: 0) }
   = f.input :max_duration, input_html: { value: number_with_precision(7, precision: 0) }
   = f.input :rate, input_html: { value: number_with_precision(1, precision: 2) }
-  = f.input :description
+  = f.input :description, as: :text
   = f.hidden_field :wanted, :value => wanted
   = f.submit "Add New Item"

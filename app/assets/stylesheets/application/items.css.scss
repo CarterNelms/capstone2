@@ -41,6 +41,13 @@
   }
 }
 
+.item{
+  img{
+    width: 50px;
+    height: 75px;
+  }
+}
+
 @media #{$medium-only}{
   #titles{
     @for $count from 3 through 4{

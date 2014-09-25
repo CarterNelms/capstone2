@@ -1,16 +1,15 @@
-- if current_user
-  - if params[:id].to_i == current_user.id
-    =link_to "Edit Profile", edit_user_registration_path
+- if @user == current_user
+  =link_to "Edit Profile", edit_user_registration_path
 
-    %ul
-      - current_user.library.items.each do |i|
-        %li= link_to i.name, item_path(i)
-    
-    =link_to "Add New Item", new_item_path, id: "new_library_item"
+%ul
+  - @user.library.items.each do |i|
+    %li= link_to i.name, item_path(i)
+- if @user == current_user
+  =link_to "Add New Item", new_item_path, id: "new_library_item"
 
-    %ul
-      - current_user.wanted_list.items.each do |i|
-        %li= link_to i.name, item_path(i)
-
-    =link_to "Add New Item", items_new_wanted_path, id: "new_wanted_list_item"
-#map-canvas
+%ul
+  - @user.wanted_list.items.each do |i|
+    %li= link_to i.name, item_path(i)
+- if @user == current_user
+  =link_to "Add New Item", items_new_wanted_path, id: "new_wanted_list_item"
+#map-canvas{style: "width: 800px; height: 400px;"}

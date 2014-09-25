@@ -17,6 +17,7 @@ feature "User edits his profile" do
     visit '/'
     click_link "Sign Up"
     fill_in "Email", with: "user1@example.com"
+    fill_in "Username", with: "User1"
     fill_in "Password", with: "password1", :match => :prefer_exact
     fill_in "Password confirmation", with: "password1"
     fill_in "Location", with: "Nashville, TN, United States"
