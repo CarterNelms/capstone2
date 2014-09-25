@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   has_one :library
   has_one :wanted_list
   before_create :prepare_user
-  geocoded_by :location
-  after_validation :geocode
+  # geocoded_by :location
+  # after_validation :geocode
 
   def prepare_user
     self.library = Library.create
