@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
   belongs_to :item_list
   has_one :user, through: :item_list
+  mount_uploader :images, ItemImageUploader
 
   def proper_class_name
     self.class.proper_class_name
