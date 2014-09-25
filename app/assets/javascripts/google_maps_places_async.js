@@ -16,15 +16,15 @@ function loadMap() {
 
     map = new google.maps.Map($map[0], mapOptions);
 
-    function updateMap(coordinates=null){
+    function updateMap(){
       // place = if targetPlace then autocomplete.getPlace(targetPlace) else autocomplete.getPlace()
-      if(!coordinates){
-        place = autocomplete.getPlace();
-        coordinates = {
-          latitude: place.geometry.location.lat(),
-          longitude: place.geometry.location.lng()
-        };
-      }
+      // if(!coordinates){
+      place = autocomplete.getPlace();
+      var coordinates = {
+        latitude: place.geometry.location.lat(),
+        longitude: place.geometry.location.lng()
+      };
+      // }
       var newlatlong = new google.maps.LatLng(coordinates.latitude, coordinates.longitude);
       if(!marker){marker = new google.maps.Marker({ map: map });}
       marker.setTitle($input.val());
@@ -33,7 +33,7 @@ function loadMap() {
       map.setZoom(12);
     }
 
-    if(typeof(coords) != 'undefined'){ updateMap(coords); }
+    // if(typeof(coords) != 'undefined'){ updateMap(coords); }
 
     // Add listener to detect autocomplete selection
     google.maps.event.addListener(autocomplete, 'place_changed', updateMap);
