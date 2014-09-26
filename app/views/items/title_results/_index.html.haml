@@ -10,7 +10,8 @@
             = render partial: "#{dirname}/#{s.to_s}", locals: { result: result }
             - @item_data[:type] = s.to_s.classify.constantize.proper_class_name
             %li= @item_data[:name]
-            %li= image_tag @item_data[:image]
+            - src = !@item_data[:image].blank? ? @item_data[:image] : 'no_image.png'
+            %li= image_tag src
             = simple_form_for :item, url: items_from_title_path, method: :get, defaults: { as: :hidden } do |f|
               = f.input :name, input_html: { value: @item_data[:name] }
               = f.input :type, input_html: { value: @item_data[:type] }

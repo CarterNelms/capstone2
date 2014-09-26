@@ -1,13 +1,12 @@
-%a{href: item_path(item) }
-  .item{class: "#{item.type.downcase}"}
-    %ul
-      %li= item.name
-      - if !item.images.blank?
-        %li
-          = link_to item_path(item) do
-            .img-wrap= image_tag item.images
-      %li= image_tag "icons/#{item.type.downcase}.png"
-      / - if item.user
-      /   %li
-      /     Owned by
-      /     = link_to item.user.username, user_path(item.user)}
+.item-display{class: "#{item.type.downcase}"}
+  %a{href: item_path(item) }
+    - src = !item.images.blank? ? item.images : "no_image.png"
+    .img-wrap= image_tag src
+    .info
+      .name= item.name
+      .desc= item.description
+      / .icon= image_tag "icons/#{item.type.downcase}.png"
+    / - if item.user
+    /   %li
+    /     Owned by
+    /     = link_to item.user.username, user_path(item.user)}

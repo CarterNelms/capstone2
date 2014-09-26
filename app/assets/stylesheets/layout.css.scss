@@ -4,6 +4,12 @@
 $main-height: calc(100vh - #{$topbar-height});
 $topbar2-height: 75px;
 
+@mixin transition-duration($duration){
+  -webkit-transition-duration: #{$duration}s;
+  -moz-transition-duration: #{$duration}s;
+  -ms-transition-duration: #{$duration}s;
+}
+
 body{
   height: $main-height;
 }
@@ -18,12 +24,26 @@ nav.main{
     height:$topbar-height;
   }
 
+  .title{
+    span{
+      opacity: 0;
+      font-size: 0.4em;
+      @include transition-duration(0.75);
+    }
+    &:hover{ span{ opacity: 1; } }
+  }
+
   .links{
     margin: 0;
     padding: 0;
-    text-align: left;
+    text-align: center;
 
-    a{@include grid-column($total-columns/4);}
+    a{
+      @include grid-column($total-columns/4);
+      &:hover{ background-color: $topbar-link-bg-color-hover; }
+
+      @include transition-duration(1/2);
+    }
   }
 
   h1, h2, h3, h4, h5, h6{ color: $secondary-color;}
@@ -42,6 +62,10 @@ nav:not(.main){
 main{
   margin-top: $topbar-height;
   &.with-nav2{ margin-top: $topbar-height + $topbar2-height; }
+}
+
+.header{
+  > *{ display: inline-block; }
 }
 
 .body-with-side-bar{

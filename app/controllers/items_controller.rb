@@ -16,6 +16,10 @@ class ItemsController < ApplicationController
   end
 
   def titles
+    @input = params["titles"] || {}
+  end
+
+  def get_titles
     @results = {}
     @input = params["titles"] || {}
     if !@input.empty?
@@ -26,6 +30,7 @@ class ItemsController < ApplicationController
         end
       end
     end
+    render partial: "/items/title_results/index", layout: false
   end
 
   def from_title

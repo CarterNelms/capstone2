@@ -4,10 +4,26 @@
 
 // Titles -------------------------------------------------
 
+$item-border-width: 3px;
+$shadow-color: #222;
+
 @mixin item-colors($color){
   $lightness-delta: -40%;
+  $shaded-color: scale-color($color, $lightness: $lightness-delta);
   background-color: $color;
-  border: 3px double scale-color($color, $lightness: $lightness-delta);
+  color: $shaded-color;
+  border-color: $shaded-color;
+  .name{ text-shadow: 3px -3px $shaded-color; }
+  a{
+    color: $shaded-color;
+    &:hover{ color: $shaded-color; }
+  }
+}
+
+@mixin item-border(){
+  border-width: $item-border-width;
+  border-style: double;
+  border-radius: 5px;
 }
 
 .simple_form.titles{
@@ -36,10 +52,11 @@
   > *{
     @include grid-column($total-columns);
     // height: $main-height;
+    @include item-border();
   }
 
   @include item-colors($item-color);
-  border-radius: 5px;
+  @include item-border();
 
   #books{
     @include item-colors($book-color);
@@ -56,18 +73,53 @@
   }
 }
 
-.item{
+.item-display{
+
+  @include grid-row();
+
+  $margin-x: 5px;
+  $margin-y: 10px;
+  $item-width: calc(100% - 2 * #{$margin-x});
+  $item-height: 175px;
+
+  width: $item-width;
+  height: $item-height;
+  margin: 0 $margin-x $margin-y $margin-x;
+
+  background-image: url("icons/book.png");
+  background-position: bottom right;
+  background-repeat: no-repeat;
+
+  font-weight: bold;
+
   .img-wrap{
-    width: 175px;
-    height: 175px;
+
+    @include grid-column($total-columns/3);
+
+    // $item-img-padding: 10px;
+    // padding: $item-img-padding;
+    width: $item-width/2;
+    height: $item-height;
 
     img{
-      max-width: 100%;
-      max-height: 100%;
+      max-width: calc(100% - 2*#{$item-border-width});
+      max-height: calc(100% - 2*#{$item-border-width});
     }
   }
 
+  .info{
+    @include grid-column(2*$total-columns/3);
+
+    .name{
+      font-size: 3em;
+      color: $white;
+      // text-shadow: 3px 3px $shadow-color;
+    }
+  }
+  // .icon{ @include grid-column($total-columns/6); }
+
   @include item-colors($item-color);
+  @include item-border();
   border-radius: 5px;
   color: $white;
 
@@ -79,12 +131,15 @@
   background-color: $item-color;
   &.book{
     @include item-colors($book-color);
+    background-image: url("icons/book.png");
   }
   &.movie{
     @include item-colors($movie-color);
+    background-image: url("icons/movie.png");
   }
   &.videogame{
     @include item-colors($videogame-color);
+    background-image: url("icons/videogame.png");
   }
 }
 

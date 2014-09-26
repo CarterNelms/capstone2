@@ -1,9 +1,13 @@
+- @input = {} if @input.nil?
+- @results = {} if @results.nil?
 - content_for(:nav) do
   - type_symbols = Item.type_symbols_plural
-  = simple_form_for :titles, html: { class: "titles columns-#{type_symbols.length}" } do |f|
+  = simple_form_for :titles, remote: true, html: { class: "titles columns-#{type_symbols.length}" } do |f|
     = f.input :keywords, label: false, input_html: { value: @input[:keywords] }
     = f.submit "Search"
     - type_symbols.each do |s|
       = f.input s, as: :boolean, input_html: { checked: @input[s] != "0" }
-%h3 Titles
-= render "/items/title_results/index"
+.header
+  %h3 Titles
+  %p - Search for titles that you want to post in your listings
+= render partial: "/items/title_results/index", layout: false

@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   #   resources :wanted_lists, only: [:index]
   # end
 
-  match '/titles', to: "items#titles", via: [:get, :post]
+  match '/titles', to: "items#titles", via: :get
+  match '/titles', to: "items#get_titles", via: :post
   get "/items/new_wanted", to: "items#new_wanted"
   get "/items/from_title", to: "items#from_title"
   get "/items/search", to: "items#index"
