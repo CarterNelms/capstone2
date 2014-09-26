@@ -8,10 +8,10 @@
   = f.input :type, label: "Item type", collection: item_type_names, :selected => autofill_params[:type] || item_type_names[0]
   = f.file_field :images, required: false #, multiple: true
   / = f.input :image_url, required: false
-  = f.label "Rent terms"
-  = f.input :min_duration, input_html: { value: number_with_precision(1, precision: 0) }
-  = f.input :max_duration, input_html: { value: number_with_precision(7, precision: 0) }
-  = f.input :rate, input_html: { value: number_with_precision(1, precision: 2) }
-  = f.input :description, as: :text
+  / = f.label "Rent terms"
+  / = f.input :min_duration, input_html: { value: number_with_precision(1, precision: 0) }
+  / = f.input :max_duration, input_html: { value: number_with_precision(7, precision: 0) }
+  / = f.input :rate, input_html: { value: number_with_precision(1, precision: 2) }
+  = f.input :description, as: :text, required: false
   = f.hidden_field :wanted, :value => wanted
   = f.submit "Add New Item"

@@ -18,6 +18,14 @@ $shadow-color: #222;
     color: $shaded-color;
     &:hover{ color: $shaded-color; }
   }
+
+  &:hover{
+    color: $white;
+    a{
+      color: $white;
+      &:hover{ color: $white; }
+    }
+  }
 }
 
 @mixin item-border(){
@@ -73,6 +81,8 @@ $shadow-color: #222;
   }
 }
 
+$item-name-font-size-small: 1.6em;
+
 .item-display{
 
   @include grid-row();
@@ -81,6 +91,7 @@ $shadow-color: #222;
   $margin-y: 10px;
   $item-width: calc(100% - 2 * #{$margin-x});
   $item-height: 175px;
+  $text-transition-duration-seconds: 1/3;
 
   width: $item-width;
   height: $item-height;
@@ -91,6 +102,8 @@ $shadow-color: #222;
   background-repeat: no-repeat;
 
   font-weight: bold;
+
+  @include transition-duration($text-transition-duration-seconds);
 
   .img-wrap{
 
@@ -113,7 +126,7 @@ $shadow-color: #222;
     .name{
       font-size: 3em;
       color: $white;
-      // text-shadow: 3px 3px $shadow-color;
+      @include transition-duration($text-transition-duration-seconds);
     }
   }
   // .icon{ @include grid-column($total-columns/6); }
@@ -132,15 +145,22 @@ $shadow-color: #222;
   &.book{
     @include item-colors($book-color);
     background-image: url("icons/book.png");
+    &:hover{ .name{ color: $book-color; } }
   }
   &.movie{
     @include item-colors($movie-color);
     background-image: url("icons/movie.png");
+    &:hover{ .name{ color: $movie-color; } }
   }
   &.videogame{
     @include item-colors($videogame-color);
     background-image: url("icons/videogame.png");
+    &:hover{ .name{ color: $videogame-color; } }
   }
+}
+
+#profile{
+  .item-display .info .name{ font-size: $item-name-font-size-small; }
 }
 
 @media #{$medium-only}{
@@ -148,7 +168,7 @@ $shadow-color: #222;
     @for $count from 3 through 4{
       &.columns-#{$count}{ > *{ @include grid-column($total-columns/2); } }
     }
-  }  
+  }
 }
 
 @media #{$small-only}{
@@ -168,6 +188,8 @@ $shadow-color: #222;
       &.columns-#{$count}{ > *{ @include grid-column($total-columns); } }
     }
   }
+
+  .item-display .info .name{ font-size: $item-name-font-size-small; }
 }
 
 // Items -------------------------------------------------

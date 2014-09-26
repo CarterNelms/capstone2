@@ -1,6 +1,9 @@
 // Place all the styles and variables related to the entire application.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url("http://fonts.googleapis.com/css?family=Varela+Round");
+
 $main-height: calc(100vh - #{$topbar-height});
 $topbar2-height: 75px;
 
@@ -12,6 +15,7 @@ $topbar2-height: 75px;
 
 body{
   height: $main-height;
+  font-family: "Varela Round";
 }
 
 nav.main{
@@ -86,7 +90,19 @@ main{
   min-height: 400px;
 }
 
-textarea{resize: none;}
+textarea{
+  resize: none;
+  min-height: 75px;
+}
+
+button, input[type="submit"]{
+  border: none;
+  background-color: $primary-color;
+  cursor: pointer;
+  color: $white;
+  padding: 18px;
+  &:hover{ background-color: scale-color($primary-color, $lightness: -14%); }
+}
 
 @media #{$small-only}{
   nav.main{

@@ -2,9 +2,17 @@ class ItemsController < ApplicationController
 
   def index
     @search = Item.search(params[:q])
+    # @items = @search.result
+    @search.build_condition if @search.conditions.empty?
+    @search.build_sort if @search.sorts.empty?
+  end
+
+  def search
+    @search = Item.search(params[:q])
     @items = @search.result
     @search.build_condition if @search.conditions.empty?
     @search.build_sort if @search.sorts.empty?
+    render partial: "listings", layout: false
   end
 
   def for_rent

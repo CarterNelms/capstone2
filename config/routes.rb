@@ -12,14 +12,16 @@ Rails.application.routes.draw do
   #   resources :wanted_lists, only: [:index]
   # end
 
-  match '/titles', to: "items#titles", via: :get
-  match '/titles', to: "items#get_titles", via: :post
+  get '/titles', to: "items#titles"
+  post '/titles', to: "items#get_titles"
+
   get "/items/new_wanted", to: "items#new_wanted"
   get "/items/from_title", to: "items#from_title"
-  get "/items/search", to: "items#index"
+  # get "/items/search", to: "items#index"
+
 
   resources :items do
-    collection { post :search, to: 'items#index' }
+    collection { post :search, to: 'items#search' }
   end
   # namespace :items do
   #   resources :movies, only: [:show]

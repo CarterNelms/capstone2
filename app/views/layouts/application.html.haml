@@ -47,5 +47,11 @@
           .body= yield(:body)
     - if content_for?(:scripts)
       = yield(:scripts)
+    - if @user
+      :javascript
+        var coords = { latitude: #{@user.latitude}, longitude: #{@user.longitude} };
     = javascript_include_tag "https://www.google.com/jsapi"
+    / = javascript_include_tag "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry"
+    / = javascript_include_tag '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js'
+    / = javascript_include_tag "underscore-min.js"
     = javascript_include_tag "application"

@@ -1,7 +1,7 @@
 %h3 All Items
 
 - content_for(:side) do
-  = search_form_for @search, url: search_items_path, method: :post do |f|
+  = search_form_for @search, url: search_items_path, method: :post, remote: true do |f|
     = f.condition_fields do |c|
       = render "condition_fields", f: c
     %p= link_to_add_fields "Add Conditions", f, :condition
@@ -12,5 +12,4 @@
     .actions= f.submit "Search"
 
 - content_for(:body) do
-  - @items.each do | item |
-    = render partial: "item", locals: {item: item}
+  #listings

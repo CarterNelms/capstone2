@@ -1,5 +1,5 @@
-.item-display{class: "#{item.type.downcase}"}
-  %a{href: item_path(item) }
+%a{href: item_path(item) }
+  .item-display{class: "#{item.type.downcase}"}
     - src = !item.images.blank? ? item.images : "no_image.png"
     .img-wrap= image_tag src
     .info
